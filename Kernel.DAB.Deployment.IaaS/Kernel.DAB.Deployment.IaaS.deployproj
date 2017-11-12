@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|AnyCPU">
+      <Configuration>Debug</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|AnyCPU">
+      <Configuration>Release</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>5fc6aabe-d35c-462a-85c6-4ee954c1a2e8</ProjectGuid>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetFrameworkIdentifier>Deployment</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>1.0</TargetFrameworkVersion>
+    <PrepareForBuildDependsOn>
+    </PrepareForBuildDependsOn>
+  </PropertyGroup>
+  <Import Condition=" Exists('Deployment.targets') " Project="Deployment.targets" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
+  <!-- vertag<:>start tokens<:>maj.min -->
+  <Import Condition=" Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Deployment\1.1\DeploymentProject.targets') " Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Deployment\1.1\DeploymentProject.targets" />
+  <!-- vertag<:>end -->
+  <ItemGroup>
+    <None Include="ARMEnvironmentParameters\prod\Analytics.parameters.json" />
+    <None Include="ARMEnvironmentParameters\prod\Kentico.parameters.json" />
+    <None Include="ARMEnvironmentParameters\prod\Kubernetes.parameters.json" />
+    <None Include="ARMEnvironmentParameters\prod\Services.parameters.json" />
+    <None Include="ARMEnvironmentParameters\prod\SQLCluster.parameters.json" />
+    <None Include="ARMEnvironmentParameters\prod\VNet.parameters.json" />
+    <None Include="ARMGroupTemplates\dev\deployDevTestLabsResourceGroup.json" />
+    <None Include="ARMGroupTemplates\prod\deployKubernetesCluster.json" />
+    <None Include="ARMGroupTemplates\prod\deployServicesGroup.json" />
+    <None Include="ARMGroupTemplates\prod\deploySQLGroup.json" />
+    <None Include="ARMGroupTemplates\prod\deployVNetGroup.json" />
+    <None Include="ARMTemplates\dev\creatingDevTestLab.json" />
+    <None Include="ARMTemplates\prod\configuringKubernetesCluster.json" />
+    <None Include="ARMTemplates\prod\configuringWso2SqlVM.json" />
+    <None Include="ARMTemplates\prod\createVnet.json" />
+    <None Include="ARMTemplates\prod\provisioningKubernetesVM.json" />
+    <None Include="ARMTemplates\prod\provisioningWso2SqlVM.json" />
+    <None Include="Deployment.targets">
+      <Visible>False</Visible>
+    </None>
+    <Content Include="ARMTemplates\common\provisioningPrimaryDomainController.json" />
+    <Content Include="ARMTemplates\prod\configuringSharePoint.json" />
+    <Content Include="ARMTemplates\prod\configuringSQLAlwaysOnCluster.json" />
+    <Content Include="dscv2\ConfigureSharePointServerHA.ps1.zip" />
+    <Content Include="Documantation\README.md" />
+    <Content Include="dsc\CreateADBDC.ps1.zip" />
+    <Content Include="dsc\CreateADPDC.ps1.zip" />
+    <Content Include="dsc\CreateFailoverCluster.ps1.zip" />
+    <Content Include="dsc\CreateFileShareWitness.ps1.zip" />
+    <Content Include="dsc\PrepareAlwaysOnSqlServer.ps1.zip" />
+    <Content Include="dscv2\ConfigureADBDC.ps1.zip" />
+    <Content Include="dscv2\ConfigureAlwaysOnSqlServer.ps1.zip" />
+    <Content Include="dscv2\ConfigureFailoverCluster.ps1.zip" />
+    <Content Include="dscv2\ConfigureFileShareWitness.ps1.zip" />
+    <Content Include="dscv2\CreateADPDC.ps1.zip" />
+    <Content Include="dscv2\PrepareADBDC.ps1.zip" />
+    <Content Include="dscv2\PrepareAlwaysOnSqlServer.ps1.zip" />
+    <Content Include="dscv2\PrepareFailoverCluster.ps1.zip" />
+    <Content Include="dscv2\PrepareFileShareWitness.ps1.zip" />
+    <Content Include="dscv2\PrepareSharePointServerHA.ps1.zip" />
+    <Content Include="ARMTemplates\common\creatingStorageAccounts.json" />
+    <Content Include="ARMTemplates\prod\provisioningSQLVMs.json" />
+    <Content Include="ARMTemplates\prod\provisioningSharepointVMs.json" />
+    <Content Include="ARMTemplates\common\publicip-new.json" />
+    <Content Include="ARMTemplates\common\publicip-rdp.json" />
+    <Content Include="nestedtemplates\createVnet.json" />
+    <Content Include="nestedtemplates\createVnet.parameters.json" />
+    <None Include="PowerShellScripts\Deploy-DevEnvironment.ps1" />
+    <None Include="PowerShellScripts\Deploy-TestEnvironment.ps1" />
+    <None Include="PowerShellScripts\DeployProdEnvironment.ps1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ARMEnvironmentParameters\dev\" />
+    <Folder Include="ARMEnvironmentParameters\test\" />
+    <Folder Include="ARMTemplates\test\" />
+  </ItemGroup>
+  <Target Name="GetReferenceAssemblyPaths" />
+</Project>

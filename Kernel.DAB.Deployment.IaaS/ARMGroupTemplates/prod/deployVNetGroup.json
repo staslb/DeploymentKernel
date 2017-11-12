@@ -1,0 +1,113 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "_artifactsLocation": {
+      "type": "string"
+    },
+    "_artifactsLocationSasToken": {
+      "type": "securestring"
+
+    },
+    "location": {
+      "type": "string"
+    },
+
+    "virtualNetworkName": {
+      "type": "string"
+
+    },
+    "virtualNetworkAddressRange": {
+      "type": "string"
+    },
+    "gatewaySubnetPrefix": {
+      "type": "string"
+    },
+    "dmzSubnetPrefix": {
+      "type": "string"
+    },
+    "frontEndSubnetPrefix": {
+      "type": "string"
+    },
+    "middleSubnetPrefix": {
+      "type": "string"
+    },
+    "sqlSubnetPrefix": {
+      "type": "string"
+    }
+  },
+
+  "variables": {
+    "createVnetTemplateFolder": "ARMGroupTeplates",
+    "createVnetTemplateFileName": "deployVNetGroup.json",
+    "gatewaySubnet": {
+      "name": "gatewaySubnet",
+      "addressPrefix": "[parameters('gatewaySubnetPrefix')]"
+    },
+    "dmzSubnet": {
+      "name": "dmzSubnet",
+      "addressPrefix": "[parameters('dmzSubnetPrefix')]",
+      "nsgName": [ "concat('dmzSubnet', 'NSG')" ]
+    },
+    "frontEndSubnet": {
+      "name": "frontEndSubnet",
+      "addressPrefix": "[parameters('frontEndSubnetPrefix')]",
+      "nsgName": [ "concat('frontEndSubnet', 'NSG')" ]
+    },
+    "middleSubnet": {
+      "name": "middleSubnet",
+      "addressPrefix": "[parameters('gatewaySubnetPrefix')]",
+      "nsgName": [ "concat('middleSubnet', 'NSG')" ]
+    },
+    "sqlSubnet": {
+      "name": "sqlSubnet",
+      "addressPrefix": "[parameters('gatewaySubnetPrefix')]",
+      "nsgName": [ "concat('sqlSubnet', 'NSG')" ]
+    }
+  },
+
+  "resources": [
+    {
+      "apiVersion": "2016-09-01",
+      "dependsOn": [],
+      "name": "createVnet",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(parameters('_artifactsLocation'), '/', 'ARMTemplates', '/', 'prod', '/', 'createVnet.json' , parameters('_artifactsLocationSasToken'))]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "virtualNetworkName": {
+            "value": "[parameters('virtualNetworkName')]"
+          },
+          "virtualNetworkAddressRange": {
+            "value": "[parameters('virtualNetworkAddressRange')]"
+          },
+          "gatewaySubnet": {
+            "value": "[variables('gatewaySubnet')]"
+          },
+          "dmzSubnet": {
+            "value": "[variables('dmzSubnet')]"
+          },
+          "frontEndSubnetName": {
+            "value": "[variables('frontEndSubnet')]"
+          },
+          "middleSubnet": {
+            "value": "[variables('middleSubnet')]"
+          },
+          "sqlSubnet": {
+            "value": "[variables('sqlSubnet')]"
+          }
+        }
+      },
+      "type": "Microsoft.Resources/deployments"
+    }
+
+  ],
+  "outputs": {
+  }
+}

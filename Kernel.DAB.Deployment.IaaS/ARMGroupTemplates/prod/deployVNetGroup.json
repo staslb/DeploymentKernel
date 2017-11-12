@@ -40,7 +40,7 @@
     "gatewaySubnetName": "gatewaySubnet",
     "gatewaySubnetAddressPrefix": "[parameters('gatewaySubnetPrefix')]",
     "dmzSubnetName": "dmzSubnet",
-    "dmzSubnetNameAddressPrefix": "[parameters('dmzSubnetPrefix')]",
+    "dmzSubnetAddressPrefix": "[parameters('dmzSubnetPrefix')]",
     "dmzSubnetNsgName": [ "concat('dmzSubnet', 'NSG')" ],
       "frontEndSubnetName": "frontEndSubnet",
       "frontEndSubnetAddressPrefix": "[parameters('frontEndSubnetPrefix')]",
@@ -56,7 +56,7 @@
 
   "resources": [
     {
-      "apiVersion": "2016-09-01",
+      "apiVersion": "2015-01-01",
       "dependsOn": [],
       "name": "createVnet",
       "properties": {
@@ -94,19 +94,19 @@
             "value": "[variables('frontEndSubnetName')]"
           },
           "frontEndSubnetAddressPrefix": {
-            "value": "[variables('frontEndAddressPrefix')]"
+            "value": "[variables('frontEndSubnetAddressPrefix')]"
           },
           "frontEndSubnetNsgName": {
-            "value": "[variables('frontEndNsgName')]"
+            "value": "[variables('frontEndSubnetNsgName')]"
           },
           "middleSubnetName": {
             "value": "[variables('middleSubnetName')]"
           },
           "middleSubnetAddressPrefix": {
-            "value": "[variables('middleAddressPrefix')]"
+            "value": "[variables('middleSubnetAddressPrefix')]"
           },
           "middleSubnetNsgName": {
-            "value": "[variables('middleNsgName')]"
+            "value": "[variables('middleSubnetNsgName')]"
           },
           "sqlSubnetName": {
             "value": "[variables('sqlSubnetName')]"

@@ -6,16 +6,13 @@
       "type": "string"
     },
     "_artifactsLocationSasToken": {
-      "type": "securestring"
-
+      "type": "string"
     },
     "location": {
       "type": "string"
     },
-
     "virtualNetworkName": {
       "type": "string"
-
     },
     "virtualNetworkAddressRange": {
       "type": "string"
@@ -74,7 +71,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[concat(parameters('_artifactsLocation'), '/', 'ARMTemplates', '/', 'prod', '/', 'createVnet.json' , parameters('_artifactsLocationSasToken'))]",
+          "uri": "https://github.com/Aresall1990/DeploymentKernel/blob/master/Kernel.DAB.Deployment.IaaS/ARMTemplates/prod/createVnet.json",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {

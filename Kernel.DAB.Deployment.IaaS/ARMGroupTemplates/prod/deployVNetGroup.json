@@ -37,31 +37,22 @@
   "variables": {
     "createVnetTemplateFolder": "ARMGroupTeplates",
     "createVnetTemplateFileName": "deployVNetGroup.json",
-    "gatewaySubnet": {
-      "name": "gatewaySubnet",
-      "addressPrefix": "[parameters('gatewaySubnetPrefix')]"
+    "gatewaySubnetName": "gatewaySubnet",
+    "gatewaySubnetAddressPrefix": "[parameters('gatewaySubnetPrefix')]",
+    "dmzSubnetName": "dmzSubnet",
+    "dmzSubnetNameAddressPrefix": "[parameters('dmzSubnetPrefix')]",
+    "dmzSubnetNsgName": [ "concat('dmzSubnet', 'NSG')" ],
+      "frontEndSubnetName": "frontEndSubnet",
+      "frontEndSubnetAddressPrefix": "[parameters('frontEndSubnetPrefix')]",
+      "frontEndSubnetNsgName": [ "concat('frontEndSubnet', 'NSG')" ],
+      "middleSubnetName": "middleSubnet",
+      "middleSubnetAddressPrefix": "[parameters('gatewaySubnetPrefix')]",
+      "middleSubnetNsgName": [ "concat('middleSubnet', 'NSG')" ],
+
+      "sqlSubnetName": "sqlSubnet",
+      "sqlSubnetAddressPrefix": "[parameters('gatewaySubnetPrefix')]",
+      "sqlSubnetNsgName": [ "concat('sqlSubnet', 'NSG')" ]
     },
-    "dmzSubnet": {
-      "name": "dmzSubnet",
-      "addressPrefix": "[parameters('dmzSubnetPrefix')]",
-      "nsgName": [ "concat('dmzSubnet', 'NSG')" ]
-    },
-    "frontEndSubnet": {
-      "name": "frontEndSubnet",
-      "addressPrefix": "[parameters('frontEndSubnetPrefix')]",
-      "nsgName": [ "concat('frontEndSubnet', 'NSG')" ]
-    },
-    "middleSubnet": {
-      "name": "middleSubnet",
-      "addressPrefix": "[parameters('gatewaySubnetPrefix')]",
-      "nsgName": [ "concat('middleSubnet', 'NSG')" ]
-    },
-    "sqlSubnet": {
-      "name": "sqlSubnet",
-      "addressPrefix": "[parameters('gatewaySubnetPrefix')]",
-      "nsgName": [ "concat('sqlSubnet', 'NSG')" ]
-    }
-  },
 
   "resources": [
     {
@@ -84,20 +75,47 @@
           "virtualNetworkAddressRange": {
             "value": "[parameters('virtualNetworkAddressRange')]"
           },
-          "gatewaySubnet": {
-            "value": "[variables('gatewaySubnet')]"
+          "gatewaySubnetName": {
+            "value": "[variables('gatewaySubnetName')]"
           },
-          "dmzSubnet": {
-            "value": "[variables('dmzSubnet')]"
+          "gatewaySubnetAddressPrefix": {
+            "value": "[variables('gatewaySubnetAddressPrefix')]"
+          },
+          "dmzSubnetName": {
+            "value": "[variables('dmzSubnetName')]"
+          },
+          "dmzSubnetAddressPrefix": {
+            "value": "[variables('dmzSubnetAddressPrefix')]"
+          },
+          "dmzSubnetNsgName": {
+            "value": "[variables('dmzSubnetNsgName')]"
           },
           "frontEndSubnetName": {
-            "value": "[variables('frontEndSubnet')]"
+            "value": "[variables('frontEndSubnetName')]"
           },
-          "middleSubnet": {
-            "value": "[variables('middleSubnet')]"
+          "frontEndSubnetAddressPrefix": {
+            "value": "[variables('frontEndAddressPrefix')]"
           },
-          "sqlSubnet": {
-            "value": "[variables('sqlSubnet')]"
+          "frontEndSubnetNsgName": {
+            "value": "[variables('frontEndNsgName')]"
+          },
+          "middleSubnetName": {
+            "value": "[variables('middleSubnetName')]"
+          },
+          "middleSubnetAddressPrefix": {
+            "value": "[variables('middleAddressPrefix')]"
+          },
+          "middleSubnetNsgName": {
+            "value": "[variables('middleNsgName')]"
+          },
+          "sqlSubnetName": {
+            "value": "[variables('sqlSubnetName')]"
+          },
+          "sqlSubnetAddressPrefix": {
+            "value": "[variables('sqlSubnetAddressPrefix')]"
+          },
+          "sqlSubnetNsgName": {
+            "value": "[variables('sqlSubnetNsgName')]"
           }
         }
       },

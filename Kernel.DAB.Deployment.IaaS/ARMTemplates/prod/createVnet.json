@@ -11,27 +11,55 @@
     "virtualNetworkAddressRange": {
       "type": "string"
     },
-    "gatewaySubnet": {
-      "type": "object"
+    "gatewaySubnetName": {
+      "type": "string"
     },
-    "dmzSubnet": {
-      "type": "object"
+    "gatewaySubnetAddressPrefix": {
+      "type": "string"
     },
-    "frontEndSubnet": {
-      "type": "object"
+    
+    "dmzSubnetName": {
+      "type": "string"
     },
-    "middleSubnet": {
-      "type": "object"
+    "dmzSubnetAddressPrefix": {
+      "type": "string"
     },
-    "SQLSubnet": {
-      "type": "object"
+    "dmzSubnetNsgName": {
+      "type": "string"
+    },
+    "frontEndSubnetName": {
+      "type": "string"
+    },
+    "frontSubnetEndAddressPrefix": {
+      "type": "string"
+    },
+    "frontEndSubnetNsgName": {
+      "type": "string"
+    },
+    "middleSubnetName": {
+      "type": "string"
+    },
+    "middleSubnetAddressPrefix": {
+      "type": "string"
+    },
+    "middleSubnetNsgName": {
+      "type": "string"
+    },
+    "SQLSubnetName": {
+      "type": "string"
+    },
+    "SQLSubnetAddressPrefix": {
+      "type": "string"
+    },
+    "SQLSubnetNsgName": {
+      "type": "string"
     }
   },
   "resources": [
     {
       "apiVersion": "2015-05-01-preview",
       "type": "Microsoft.Network/networkSecurityGroups",
-      "name": "[parameters('dmzSubnet').nsgName]",
+      "name": "[parameters('dmzSubnetNsgName')]",
       "location": "[parameters('location')]",
       "properties": {
         "securityRules": [
@@ -69,7 +97,7 @@
     {
       "apiVersion": "2015-05-01-preview",
       "type": "Microsoft.Network/networkSecurityGroups",
-      "name": "[parameters('frontEndSubnet').nsgName]",
+      "name": "[parameters('frontEndSubnetNsgName')]",
       "location": "[parameters('location')]",
       "properties": {
         "securityRules": [
@@ -107,7 +135,7 @@
     {
       "apiVersion": "2015-05-01-preview",
       "type": "Microsoft.Network/networkSecurityGroups",
-      "name": "[parameters('middleSubnet').nsgName]",
+      "name": "[parameters('middleSubnetNsgName')]",
       "location": "[parameters('location')]",
       "properties": {
         "securityRules": [
@@ -118,7 +146,7 @@
               "protocol": "Tcp",
               "sourcePortRange": "*",
               "destinationPortRange": "443",
-              "sourceAddressPrefix": "[parameters('middleSubnet').addressPrefix]",
+              "sourceAddressPrefix": "[parameters('middleSubnetAddressPrefix')]",
               "destinationAddressPrefix": "*",
               "access": "Allow",
               "priority": 100,
@@ -159,7 +187,7 @@
     {
       "apiVersion": "2015-05-01-preview",
       "type": "Microsoft.Network/networkSecurityGroups",
-      "name": "[parameters('SQLSubnet').nsgName]",
+      "name": "[parameters('SQLSubnetNsgName')]",
       "location": "[parameters('location')]",
       "properties": {
         "securityRules": [
@@ -170,7 +198,7 @@
               "protocol": "Tcp",
               "sourcePortRange": "*",
               "destinationPortRange": "1433",
-              "sourceAddressPrefix": "[parameters('middleSubnet').addressPrefix]",
+              "sourceAddressPrefix": "[parameters('middleSubnetAddressPrefix')]",
               "destinationAddressPrefix": "*",
               "access": "Allow",
               "priority": 100,
@@ -184,7 +212,7 @@
               "protocol": "*",
               "sourcePortRange": "*",
               "destinationPortRange": "*",
-              "sourceAddressPrefix": "[parameters('frontEndSubnet').addressPrefix]",
+              "sourceAddressPrefix": "[parameters('frontSubnetEndAddressPrefix')]",
               "destinationAddressPrefix": "*",
               "access": "Deny",
               "priority": 101,
@@ -198,7 +226,7 @@
               "protocol": "*",
               "sourcePortRange": "*",
               "destinationPortRange": "*",
-              "sourceAddressPrefix": "[parameters('middleSubnet').addressPrefix]",
+              "sourceAddressPrefix": "[parameters('middleSubnetAddressPrefix')]",
               "destinationAddressPrefix": "*",
               "access": "Deny",
               "priority": 102,
@@ -229,10 +257,10 @@
       "name": "[parameters('virtualNetworkName')]",
       "location": "[parameters('location')]",
       "dependsOn": [
-        "[concat('Microsoft.Network/networkSecurityGroups/', parameters('dmzSubnet').nsgName)]",
-        "[concat('Microsoft.Network/networkSecurityGroups/', parameters('frontEndSubnet').nsgName)]",
-        "[concat('Microsoft.Network/networkSecurityGroups/', parameters('middleSubnet').nsgName)]",
-        "[concat('Microsoft.Network/networkSecurityGroups/', parameters('SQLSubnet').nsgName)]"
+        "[concat('Microsoft.Network/networkSecurityGroups/', parameters('dmzSubnetNsgName'))]",
+        "[concat('Microsoft.Network/networkSecurityGroups/', parameters('fronEndSubnetNsgName'))]",
+        "[concat('Microsoft.Network/networkSecurityGroups/', parameters('middleSubnetNsgName'))]",
+        "[concat('Microsoft.Network/networkSecurityGroups/', parameters('SQLSubnetNsgName'))]"
       ],
 
       "properties": {
@@ -243,44 +271,44 @@
         },
         "subnets": [
           {
-            "name": "[parameters('gatewaySubnet').name]",
+            "name": "[parameters('gatewaySubnetName')]",
             "properties": {
-              "addressPrefix": "[parameters('gatewaySubnet').addressPrefix]"
+              "addressPrefix": "[parameters('gatewaySubnetAddressPrefix')]"
             }
           },
           {
-            "name": "[parameters('dmzSubnet').name]",
+            "name": "[parameters('dmzSubnetName')]",
             "properties": {
-              "addressPrefix": "[parameters('dmzSubnet').addressPrefix]",
+              "addressPrefix": "[parameters('dmzSubnetAddressPrefix')]",
               "networkSecurityGroup": {
-                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('dmzSubnet').nsgName)]"
+                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('dmzSubnetNsgName'))]"
               }
             }
           },
           {
-            "name": "[parameters('frontEndSubnet').name]",
+            "name": "[parameters('frontEndSubnetName')]",
             "properties": {
-              "addressPrefix": "[parameters('frontEndSubnet').addressPrefix]",
+              "addressPrefix": "[parameters('frontEndSubnetAddressPrefix')]",
               "networkSecurityGroup": {
-                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('frontEndSubnet').nsgName)]"
+                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('frontEndSubnetNsgName'))]"
               }
             }
           },
           {
-            "name": "[parameters('middleSubnet').name]",
+            "name": "[parameters('middleSubnetName')]",
             "properties": {
-              "addressPrefix": "[parameters('middleSubnet').addressPrefix]",
+              "addressPrefix": "[parameters('middleSubnetAddressPrefix')]",
               "networkSecurityGroup": {
-                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('middleSubnet').nsgName)]"
+                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('middleSubnetNsgName'))]"
               }
             }
           },
           {
-            "name": "[parameters('SQLSubnet').name]",
+            "name": "[parameters('SQLSubnetName')]",
             "properties": {
-              "addressPrefix": "[parameters('SQLSubnet').addressPrefix]",
+              "addressPrefix": "[parameters('SQLSubnetAddressPrefix')]",
               "networkSecurityGroup": {
-                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('SQLSubnet').nsgName)]"
+                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('SQLSubnetNsgName'))]"
               }
             }
           }

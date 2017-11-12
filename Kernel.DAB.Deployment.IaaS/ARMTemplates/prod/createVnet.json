@@ -222,70 +222,72 @@
         ]
       }
     },
-    {
-      "name": "[parameters('virtualNetworkName')]",
-      "type": "Microsoft.Network/virtualNetworks",
-      "location": "[parameters('location')]",
-      "dependsOn": [
-        "[concat('Microsoft.Network/networkSecurityGroups/', parameters('dmzSubnet').nsgName)]",
-        "[concat('Microsoft.Network/networkSecurityGroups/', parameters('frontEndSubnet').nsgName)]",
-        "[concat('Microsoft.Network/networkSecurityGroups/', parameters('middleSubnet').nsgName)]",
-        "[concat('Microsoft.Network/networkSecurityGroups/', parameters('SQLSubnet').nsgName)]"
-      ],
-      "apiVersion": "2015-06-15",
-      "properties": {
-        "addressSpace": {
-          "addressPrefixes": [
-            "[parameters('virtualNetworkAddressRange')]"
+      
+      {
+        "apiVersion": "2017-06-01",
+        "name": "[parameters('virtualNetworkName')]",
+        "type": "Microsoft.Network/virtualNetworks",
+        "location": "[parameters('location')]",
+        "dependsOn": [
+          "[concat('Microsoft.Network/networkSecurityGroups/', parameters('dmzSubnet').nsgName)]",
+          "[concat('Microsoft.Network/networkSecurityGroups/', parameters('frontEndSubnet').nsgName)]",
+          "[concat('Microsoft.Network/networkSecurityGroups/', parameters('middleSubnet').nsgName)]",
+          "[concat('Microsoft.Network/networkSecurityGroups/', parameters('SQLSubnet').nsgName)]"
+        ],
+
+        "properties": {
+          "addressSpace": {
+            "addressPrefixes": [
+              "[parameters('virtualNetworkAddressRange')]"
+            ]
+          },
+          "subnets": [
+            {
+              "name": "[parameters('gatewaySubnet').name]",
+              "properties": {
+                "addressPrefix": "[parameters('gatewaySubnet').addressPrefix]"
+              }
+            },
+            {
+              "name": "[parameters('dmzSubnet').name]",
+              "properties": {
+                "addressPrefix": "[parameters('dmzSubnet').addressPrefix]",
+                "networkSecurityGroup": {
+                  "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('dmzSubnet').nsgName)]"
+                }
+              }
+            },
+            {
+              "name": "[parameters('frontEndSubnet').name]",
+              "properties": {
+                "addressPrefix": "[parameters('frontEndSubnet').addressPrefix]",
+                "networkSecurityGroup": {
+                  "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('frontEndSubnet').nsgName)]"
+                }
+              }
+            },
+            {
+              "name": "[parameters('middleSubnet').name]",
+              "properties": {
+                "addressPrefix": "[parameters('middleSubnet').addressPrefix]",
+                "networkSecurityGroup": {
+                  "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('middleSubnet').nsgName)]"
+                }
+              }
+            },
+            {
+              "name": "[parameters('SQLSubnet').name]",
+              "properties": {
+                "addressPrefix": "[parameters('SQLSubnet').addressPrefix]",
+                "networkSecurityGroup": {
+                  "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('SQLSubnet').nsgName)]"
+                }
+              }
+            }
           ]
-        },
-        "subnets": [
-          {
-            "name": "[parameters('gatewaySubnet').name]",
-            "properties": {
-              "addressPrefix": "[parameters('gatewaySubnet').addressPrefix]"
-            }
-          },
-          {
-            "name": "[parameters('dmzSubnet').name]",
-            "properties": {
-              "addressPrefix": "[parameters('dmzSubnet').addressPrefix]",
-              "networkSecurityGroup": {
-                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('dmzSubnet').nsgName)]"
-              }
-            }
-          },
-          {
-            "name": "[parameters('frontEndSubnet').name]",
-            "properties": {
-              "addressPrefix": "[parameters('frontEndSubnet').addressPrefix]",
-              "networkSecurityGroup": {
-                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('frontEndSubnet').nsgName)]"
-              }
-            }
-          },
-          {
-            "name": "[parameters('middleSubnet').name]",
-            "properties": {
-              "addressPrefix": "[parameters('middleSubnet').addressPrefix]",
-              "networkSecurityGroup": {
-                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('middleSubnet').nsgName)]"
-              }
-            }
-          },
-          {
-            "name": "[parameters('SQLSubnet').name]",
-            "properties": {
-              "addressPrefix": "[parameters('SQLSubnet').addressPrefix]",
-              "networkSecurityGroup": {
-                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('SQLSubnet').nsgName)]"
-              }
-            }
-          }
-        ]
+        }
+      }
+      ],
+      "outputs": {
       }
     }
-  ],
-  "outputs": {
-  }
-}

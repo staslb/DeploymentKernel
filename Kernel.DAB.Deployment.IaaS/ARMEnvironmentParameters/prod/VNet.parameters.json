@@ -3,21 +3,21 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "_artifactsLocation": {
-      "value": "https://automationkerneliaas.blob.core.windows.net:443/templates/Kernel.DAB.Deployment.IaaS/Kernel.DAB.Deployment.IaaS",
+      "value": "https://github.com/Aresall1990/DeploymentKernel/tree/master/Kernel.DAB.Deployment.IaaS",
       "metadata": {
         "group": "Infrastructure settings",
         "description": "The address range of the SP App subnet created in the new VNET"
       }
     },
     "_artifactsLocationSasToken": {
-      "value": "?sv=2015-04-05&sr=c&sig=x%2FxpcpCKQ2c5Wx5%2BFjuimQQFOZGZYSjCw4pTC543Mqo%3D&se=2017-11-30T02%3A53%3A04Z&sp=rwdl",
+      "value": "",
       "metadata": {
         "group": "Infrastructure settings",
         "description": "Auto-generated token to access _artifactsLocation",
         "artifactsLocationSasToken": ""
       }
     },
-    "localtion": {
+    "location": {
       "value": "[resourceGroup().location]",
       "metadata": {
         "group": "SharePoint Server settings",

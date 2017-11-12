@@ -92,20 +92,24 @@ if ($UploadArtifacts) {
             (New-AzureStorageContainerSASToken -Container $StorageContainerName -Context $StorageAccount.Context -Permission r -ExpiryTime (Get-Date).AddHours(4))
     }
 }
-
-$username = "lv-teamcity.kernel@eleks.com"
+ 
+ $username = "lv-teamcity.kernel@eleks.com"
  $password = "B?rW?atPEa"
  $secstr = New-Object -TypeName System.Security.SecureString
  $password.ToCharArray() | ForEach-Object {$secstr.AppendChar($_)}
  $cred = new-object -typename System.Management.Automation.PSCredential -argumentlist $username, $secstr
+
 
  Login-AzureRmAccount -Credential $cred 
 
 # Create or update the resource group using the specified template file and template parameters file
 New-AzureRmResourceGroup -Name $ResourceGroupName -Location $ResourceGroupLocation -Verbose -Force
 
+
+
 if ($ValidateOnly) {
-    $ErrorMessages = Format-ValidationOutput (Test-AzureRmResourceGroupDeployment -ResourceGroupName $ResourceGroupName `
+
+     $ErrorMessages = Format-ValidationOutput (Test-AzureRmResourceGroupDeployment -ResourceGroupName $ResourceGroupName `
                                                                                   -TemplateFile $TemplateFile `
                                                                                   -TemplateParameterFile $TemplateParametersFile `
                                                                                   @OptionalParameters)
@@ -127,6 +131,7 @@ else {
                                        -TemplateParameterFile $TemplateParametersFile `
                                        @OptionalParameters `
                                        -Force -Verbose `
+                                       -Debug `
                                        -ErrorVariable ErrorMessages
     if ($ErrorMessages) {
         Write-Output '', 'Template deployment returned the following errors:', @(@($ErrorMessages) | ForEach-Object { $_.Exception.Message.TrimEnd("`r`n") })

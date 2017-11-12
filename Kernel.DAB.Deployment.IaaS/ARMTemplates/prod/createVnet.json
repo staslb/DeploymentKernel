@@ -17,7 +17,6 @@
     "gatewaySubnetAddressPrefix": {
       "type": "string"
     },
-    
     "dmzSubnetName": {
       "type": "string"
     },
@@ -315,7 +314,5 @@
         ]
       }
     } 
-  ],
-   "outputs": {
-      }
+  ]
     }

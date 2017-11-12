@@ -56,8 +56,8 @@
 
   "resources": [
     {
+      "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
-      "dependsOn": [],
       "name": "createVnet",
       "properties": {
         "mode": "Incremental",
@@ -119,7 +119,7 @@
           }
         }
       },
-      "type": "Microsoft.Resources/deployments"
+      "dependsOn": []
     }
 
   ],

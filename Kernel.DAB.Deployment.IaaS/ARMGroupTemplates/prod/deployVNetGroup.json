@@ -42,16 +42,15 @@
     "dmzSubnetName": "dmzSubnet",
     "dmzSubnetAddressPrefix": "[parameters('dmzSubnetPrefix')]",
     "dmzSubnetNsgName": [ "concat('dmzSubnet', 'NSG')" ],
-      "frontEndSubnetName": "frontEndSubnet",
-      "frontEndSubnetAddressPrefix": "[parameters('frontEndSubnetPrefix')]",
-      "frontEndSubnetNsgName": [ "concat('frontEndSubnet', 'NSG')" ],
-      "middleSubnetName": "middleSubnet",
-      "middleSubnetAddressPrefix": "[parameters('gatewaySubnetPrefix')]",
-      "middleSubnetNsgName": [ "concat('middleSubnet', 'NSG')" ],
-
-      "sqlSubnetName": "sqlSubnet",
-      "sqlSubnetAddressPrefix": "[parameters('gatewaySubnetPrefix')]",
-      "sqlSubnetNsgName": [ "concat('sqlSubnet', 'NSG')" ]
+    "frontEndSubnetName": "frontEndSubnet",
+    "frontEndSubnetAddressPrefix": "[parameters('frontEndSubnetPrefix')]",
+    "frontEndSubnetNsgName": [ "concat('frontEndSubnet', 'NSG')" ],
+    "middleSubnetName": "middleSubnet",
+    "middleSubnetAddressPrefix": "[parameters('gatewaySubnetPrefix')]",
+    "middleSubnetNsgName": [ "concat('middleSubnet', 'NSG')" ],
+    "sqlSubnetName": "sqlSubnet",
+    "sqlSubnetAddressPrefix": "[parameters('gatewaySubnetPrefix')]",
+    "sqlSubnetNsgName": [ "concat('sqlSubnet', 'NSG')" ]
     },
 
   "resources": [
@@ -122,7 +121,5 @@
       "dependsOn": []
     }
 
-  ],
-  "outputs": {
-  }
+  ]
 }

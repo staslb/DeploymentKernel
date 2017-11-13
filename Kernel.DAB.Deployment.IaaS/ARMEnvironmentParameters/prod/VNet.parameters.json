@@ -3,7 +3,7 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "_artifactsLocation": {
-      "value": "https://github.com/Aresall1990/DeploymentKernel/tree/master/Kernel.DAB.Deployment.IaaS",
+      "value": "https://raw.githubusercontent.com/Aresall1990/DeploymentKernel/master/Kernel.DAB.Deployment.IaaS",
       "metadata": {
         "group": "Infrastructure settings",
         "description": "The address range of the SP App subnet created in the new VNET"

@@ -1,0 +1,130 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "virtualMachineName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "virtualMachineAdminUserName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "virtualMachineAdminPassword": {
+      "type": "securestring"
+    },
+    "virtualMachineWindowsOSVersion": {
+      "type": "string",
+      "defaultValue": "2012-R2-Datacenter",
+      "allowedValues": [
+        "2008-R2-SP1",
+        "2012-Datacenter",
+        "2012-R2-Datacenter",
+        "Windows-Server-Technical-Preview"
+      ]
+    },
+    "storageAccountName": {
+      "type": "string"
+    },
+    "storageAccountLocation": {
+      "type": "string"
+    },
+    "storageAccountResourceGroup": {
+      "type": "string"
+    },
+    "virtualNetworkName": {
+      "type": "string"
+    },
+    "virtualNetworkLocation": {
+      "type": "string"
+    },
+    "virtualNetworkResourceGroup": {
+      "type": "string"
+    },
+    "virtualNetworkSubnetName": {
+      "type": "string"
+    }
+  },
+  "variables": {
+    "virtualMachineImagePublisher": "MicrosoftWindowsServer",
+    "virtualMachineImageOffer": "WindowsServer",
+    "virtualMachineOSDiskName": "virtualMachineOSDisk",
+    "virtualMachineVmSize": "Standard_D2_v2",
+    "virtualMachineVnetID": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
+    "virtualMachineSubnetRef": "[concat(variables('virtualMachineVnetID'), '/subnets/', parameters('virtualNetworkSubnetName'))]",
+    "virtualMachineStorageAccountContainerName": "vhds",
+    "virtualMachineNicName": "[concat(parameters('virtualMachineName'), 'NetworkInterface')]"
+  },
+  "resources": [
+    {
+      "name": "[variables('virtualMachineNicName')]",
+      "type": "Microsoft.Network/networkInterfaces",
+      "location": "[parameters('virtualNetworkLocation')]",
+      "apiVersion": "2016-03-30",
+      "dependsOn": [ ],
+      "tags": {
+        "displayName": "virtualMachineNic"
+      },
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "[variables('virtualMachineSubnetRef')]"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "[parameters('virtualMachineName')]",
+      "type": "Microsoft.Compute/virtualMachines",
+      "location": "[parameters('storageAccountLocation')]",
+      "apiVersion": "2015-06-15",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/networkInterfaces', variables('virtualMachineNicName'))]"
+      ],
+      "tags": {
+        "displayName": "virtualMachine"
+      },
+      "properties": {
+        "hardwareProfile": {
+          "vmSize": "[variables('virtualMachineVmSize')]"
+        },
+        "osProfile": {
+          "computerName": "[parameters('virtualMachineName')]",
+          "adminUsername": "[parameters('virtualMachineAdminUsername')]",
+          "adminPassword": "[parameters('virtualMachineAdminPassword')]"
+        },
+        "storageProfile": {
+          "imageReference": {
+            "publisher": "[variables('virtualMachineImagePublisher')]",
+            "offer": "[variables('virtualMachineImageOffer')]",
+            "sku": "[parameters('virtualMachineWindowsOSVersion')]",
+            "version": "latest"
+          },
+          "osDisk": {
+            "name": "virtualMachineOSDisk",
+            "vhd": {
+              "uri": "[concat(reference(resourceId(parameters('storageAccountResourceGroup'), 'Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2016-01-01').primaryEndpoints.blob, variables('virtualMachineStorageAccountContainerName'), '/', variables('virtualMachineOSDiskName'), '.vhd')]"
+            },
+            "caching": "ReadWrite",
+            "createOption": "FromImage"
+          }
+        },
+        "networkProfile": {
+          "networkInterfaces": [
+            {
+              "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('virtualMachineNicName'))]"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "outputs": {
+  }
+}

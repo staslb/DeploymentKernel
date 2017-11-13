@@ -2,5 +2,27 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
+    "_artifactsLocation": {
+      "value": "https://raw.githubusercontent.com/Aresall1990/DeploymentKernel/master/Kernel.DAB.Deployment.IaaS",
+      "metadata": {
+        "group": "Infrastructure settings",
+        "description": "The address range of the SP App subnet created in the new VNET"
+      }
+    },
+    "_artifactsLocationSasToken": {
+      "value": "",
+      "metadata": {
+        "group": "Infrastructure settings",
+        "description": "Auto-generated token to access _artifactsLocation",
+        "artifactsLocationSasToken": ""
+      }
+    },
+    "location": {
+      "value": "West Europe",
+      "metadata": {
+        "group": "SharePoint Server settings",
+        "description": "The address range of the SP App subnet created in the new VNET"
+      }
+    }
   }
 }

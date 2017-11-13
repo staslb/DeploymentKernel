@@ -45,11 +45,11 @@
     "frontEndSubnetName": "frontEndSubnet",
     "frontEndSubnetAddressPrefix": "[parameters('frontEndSubnetPrefix')]",
     "frontEndSubnetNsgName": "frontEndSubnetNSG",
-    "middleSubnetName": "middleSubnet",
-    "middleSubnetAddressPrefix": "[parameters('gatewaySubnetPrefix')]",
+    "middleSubnetName": "middleSubnet", 
+    "middleSubnetAddressPrefix": "[parameters('middleSubnetPrefix')]",
     "middleSubnetNsgName": "middleSubnetNSG",
     "sqlSubnetName": "sqlSubnet",
-    "sqlSubnetAddressPrefix": "[parameters('gatewaySubnetPrefix')]",
+    "sqlSubnetAddressPrefix": "[parameters('sqlSubnetPrefix')]",
     "sqlSubnetNsgName": "sqlSubnetNSG" 
     },
 

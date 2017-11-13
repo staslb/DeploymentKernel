@@ -41,16 +41,16 @@
     "gatewaySubnetAddressPrefix": "[parameters('gatewaySubnetPrefix')]",
     "dmzSubnetName": "dmzSubnet",
     "dmzSubnetAddressPrefix": "[parameters('dmzSubnetPrefix')]",
-    "dmzSubnetNsgName": [ "concat('dmzSubnet', 'NSG')" ],
+    "dmzSubnetNsgName":  "dmzSubnetNSG",
     "frontEndSubnetName": "frontEndSubnet",
     "frontEndSubnetAddressPrefix": "[parameters('frontEndSubnetPrefix')]",
-    "frontEndSubnetNsgName": [ "concat('frontEndSubnet', 'NSG')" ],
+    "frontEndSubnetNsgName": "frontEndSubnetNSG",
     "middleSubnetName": "middleSubnet",
     "middleSubnetAddressPrefix": "[parameters('gatewaySubnetPrefix')]",
-    "middleSubnetNsgName": [ "concat('middleSubnet', 'NSG')" ],
+    "middleSubnetNsgName": "middleSubnetNSG",
     "sqlSubnetName": "sqlSubnet",
     "sqlSubnetAddressPrefix": "[parameters('gatewaySubnetPrefix')]",
-    "sqlSubnetNsgName": [ "concat('sqlSubnet', 'NSG')" ]
+    "sqlSubnetNsgName": "sqlSubnetNSG" 
     },
 
   "resources": [

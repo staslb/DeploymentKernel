@@ -70,8 +70,7 @@
     <Content Include="ARMTemplates\prod\provisioningSharepointVMs.json" />
     <Content Include="ARMTemplates\common\publicip-new.json" />
     <Content Include="ARMTemplates\common\publicip-rdp.json" />
-    <Content Include="nestedtemplates\createVnet.json" />
-    <Content Include="nestedtemplates\createVnet.parameters.json" />
+    <None Include="Documantation\Commands.ps1" />
     <None Include="PowerShellScripts\Deploy-DevEnvironment.ps1" />
     <None Include="PowerShellScripts\Deploy-TestEnvironment.ps1" />
     <None Include="PowerShellScripts\DeployProdEnvironment.ps1" />

@@ -1,0 +1,57 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+          "value": "West Europe"
+        },
+        "virtualNetworkName": {
+          "value": "DigAgroVNet"
+        },
+        "virtualNetworkAddressRange": {
+          "value": "10.200.5.0/25"
+        },
+        "gatewaySubnetName": {
+          "value": "gatewaySubnet"
+        },
+        "gatewaySubnetAddressPrefix": {
+          "value": "10.200.5.32/29"
+        },
+        "dmzSubnetName": {
+          "value": "dmzSubnet"
+        },
+        "dmzSubnetAddressPrefix": {
+          "value": "10.200.5.112/28"
+        },
+        "dmzSubnetNsgName": {
+          "value": "dmzSubnetNSG"
+        },
+        "frontEndSubnetName": {
+          "value": "FrontEndSubnet"
+        },
+        "frontEndSubnetAddressPrefix": {
+          "value": "10.200.5.64/27"
+        },
+        "frontEndSubnetNsgName": {
+          "value": "FrontEntSubnetNSG"
+        },
+        "middleSubnetName": {
+          "value": "middleSubnet"
+        },
+        "middleSubnetAddressPrefix": {
+          "value": "10.200.5.48/28"
+        },
+        "middleSubnetNsgName": {
+          "value": "middleSubnetNSG"
+        },
+        "sqlSubnetName": {
+          "value": "sqlSubnet"
+        },
+        "sqlSubnetAddressPrefix": {
+          "value": "10.200.5.96/28"
+        },
+        "sqlSubnetNsgName": {
+          "value": "sqlSubnetNSG"
+        }
+      }
+  }

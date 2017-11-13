@@ -61,7 +61,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "https://github.com/Aresall1990/DeploymentKernel/blob/master/Kernel.DAB.Deployment.IaaS/ARMTemplates/prod/createVnet.json",
+          "uri": "https://raw.githubusercontent.com/Aresall1990/DeploymentKernel/master/Kernel.DAB.Deployment.IaaS/ARMTemplates/prod/createVnet.json",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {

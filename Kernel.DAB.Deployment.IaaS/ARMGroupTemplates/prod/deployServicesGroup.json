@@ -167,76 +167,7 @@
         }
       }
     }
-   //{
-   //   "name": "createWindowsVirtualMachine",
-   //   "type": "Microsoft.Resources/deployments",
-   //   "apiVersion": "2016-09-01",
-   //   "dependsOn": [
-   //     "Microsoft.Resources/deployments/createStorageAccount",
-   //     "Microsoft.Resources/deployments/createNetworkInterface"
-   //   ],
-   //   "properties": {
-   //     "mode": "Incremental",
-   //     "templateLink": {
-   //       "uri": "[concat(parameters('_artifactsLocation'), '/', variables('createWindowsVirtualMachineTemplateFolder'), '/', variables('createWindowsVirtualMachineTemplateFileName'), parameters('_artifactsLocationSasToken'))]",
-   //       "contentVersion": "1.0.0.0"
-   //     },
-   //     //  "parametersLink": {
-   //     //    "uri": "[concat(parameters('_artifactsLocation'), '/', variables('createWindowsVirtualMachineTemplateFolder'), '/', variables('createWindowsVirtualMachineTemplateParametersFileName'), parameters('_artifactsLocationSasToken'))]",
-   //     //    "contentVersion": "1.0.0.0"
-   //     //  }
-   //     "parameters": {
-   //       "servicesVMName": {
-   //         "value": "[variables('vmSettings').services]"
-   //       },
-   //       "location": {
-   //         "value": "[parameters('location')]"
-   //       },
-   //       "servicesVMSize": {
-   //         "value": "[parameters('servicesVMSize')]"
-   //       },
-   //       //"spWebAvailabilitySet": {
-   //       //  "value": "[variables('ids').spWebAvailabilitySetName]"
-   //       //},
-   //       //"spAppAvailabilitySet": {
-   //       //  "value": "[variables('ids').spAppAvailabilitySetName]"
-   //       //},
-   //       "adminUsername": {
-   //         "value": "[parameters('adminUsername')]"
-   //       },
-   //       "adminPassword": {
-   //         "value": "[parameters('adminPassword')]"
-   //       },
-   //       "spImagePublisher": {
-   //         "value": "[variables('vmSettings').spImagePublisher]"
-   //       },
-   //       "spImageOffer": {
-   //         "value": "[variables('vmSettings').spImageOffer]"
-   //       },
-   //       "spImageSKU": {
-   //         "value": "[variables('vmSettings').spImageSKU]"
-   //       },
-   //       "vmContainerName": {
-   //         "value": "[variables('vmSettings').vmContainerName]"
-   //       },
-   //       "storageAccountNamePrefix": {
-   //         "value": "[parameters('storageAccountNamePrefix')]"
-   //       }
-   //       //"spPreparationModulesURL": {
-   //       //  "value": "[concat(parameters('_artifactsLocation'),'/','dscv2','/','PrepareSharePointServerHA.ps1.zip', parameters('_artifactsLocationSasToken'))]"
-   //       //},
-   //       //"spPreparationFunction": {
-   //       //  "value": "PrepareSharePointServerHA.ps1\\PrepareSharePointServerHA"
-   //       // },
-   //       //"domainName": {
-   //       //  "value": "[parameters('domainName')]"
-   //       //},
-   //       //"DNSServer": {
-   //       //  "value": "[parameters('adPdcNicIPAddress')]"
-   //     }
-   //     }
-
-   //   }
+ 
     
   ],
   "outputs": {

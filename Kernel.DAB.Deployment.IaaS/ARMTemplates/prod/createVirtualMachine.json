@@ -57,7 +57,7 @@
       "location": "[parameters('location')]",
       "apiVersion": "2015-06-15",
       "dependsOn": [
-        "[resourceId('Microsoft.Network/networkInterfaces', variables('virtualMachineNicName'))]"
+        "[resourceId('Microsoft.Network/networkInterfaces', concat(parameters('virtualMachineName'), 'NiC'))]"
       ],
       "tags": {
         "displayName": "virtualMachine"

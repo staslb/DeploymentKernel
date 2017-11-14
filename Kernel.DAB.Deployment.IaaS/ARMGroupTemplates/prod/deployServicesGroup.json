@@ -62,7 +62,7 @@
     "servicesNetworkInterfaceName": "servicesNiC",
     "vmSettings": {
       "vmContainerName": "vhds",
-      "servicesVMName": "services-web",
+      "servicesVMName": "services",
       "windowsImagePublisher": "MicrosoftWindowsServer",
       "windowsImageOffer": "WindowsServer",
       "windowsImageSKU": "2012-R2-Datacenter",

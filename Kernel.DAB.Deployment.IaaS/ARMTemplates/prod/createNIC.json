@@ -18,9 +18,6 @@
     "publicIPAddressName": {
       "type": "string"
     },
-    "virtualNetworkLocation": {
-      "type": "string"
-    },
     "virtualNetworkResourceGroup": {
       "type": "string"
     }

@@ -23,9 +23,6 @@
         "Windows-Server-Technical-Preview"
       ]
     },
-    "storageAccountName": {
-      "type": "string"
-    },
     "location": {
       "type": "string"
     },
@@ -50,7 +47,8 @@
     "virtualMachineVnetID": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
     "virtualMachineSubnetRef": "[concat(variables('virtualMachineVnetID'), '/subnets/', parameters('virtualNetworkSubnetName'))]",
     "virtualMachineStorageAccountContainerName": "vhds",
-    "virtualMachineNicName": "[concat(parameters('virtualMachineName'), 'NIC')]"
+    "virtualMachineNicName": "[concat(parameters('virtualMachineName'), 'NIC')]",
+    "storageAccountName": "storagename4" //to fix it
   },
   "resources": [
     {
@@ -83,7 +81,7 @@
           "osDisk": {
             "name": "virtualMachineOSDisk",
             "vhd": {
-              "uri": "[concat(reference(resourceId(parameters('storageAccountResourceGroup'), 'Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2016-01-01').primaryEndpoints.blob, variables('virtualMachineStorageAccountContainerName'), '/', variables('virtualMachineOSDiskName'), '.vhd')]"
+              "uri": "[concat(reference(resourceId(parameters('storageAccountResourceGroup'), 'Microsoft.Storage/storageAccounts', variables('storageAccountName')), '2016-01-01').primaryEndpoints.blob, variables('virtualMachineStorageAccountContainerName'), '/', variables('virtualMachineOSDiskName'), '.vhd')]"
             },
             "caching": "ReadWrite",
             "createOption": "FromImage"

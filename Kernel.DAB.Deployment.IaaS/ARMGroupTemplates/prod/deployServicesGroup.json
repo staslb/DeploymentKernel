@@ -206,9 +206,6 @@
             "value": "[variables('vmSettings').windowsImageSKU]"
           },
 
-          "storageAccountName": {
-            "value": "storagename4"
-          },
           "storageAccountResourceGroup": {
             "value": "AzureResourceGroupAutomationServices"
           },
@@ -231,7 +228,7 @@
           //  "value": "[parameters('domainName')]"
           //},
           //"DNSServer": {
-          //  "value": "[parameters('adPdcNicIPAddress')]"
+          //  "value": "[parameters('adPdcNicIPAddress')]"s
         }
       }
     }

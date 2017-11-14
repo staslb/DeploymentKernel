@@ -186,9 +186,9 @@
           "location": {
             "value": "[parameters('location')]"
           },
-          "servicesVMSize": {
-            "value": "[parameters('servicesVMSize')]"
-          },
+         // "servicesVMSize": { No need for now . to be corrected
+         //   "value": "[parameters('servicesVMSize')]"
+         // },
           //"spWebAvailabilitySet": {
           //  "value": "[variables('ids').spWebAvailabilitySetName]"
           //},

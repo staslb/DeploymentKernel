@@ -56,7 +56,7 @@
       "type": "Microsoft.Compute/virtualMachines",
       "location": "[parameters('location')]",
       "apiVersion": "2015-06-15",
-      "dependsOn": [ ],
+      "dependsOn": [],
       "tags": {
         "displayName": "virtualMachine"
       },

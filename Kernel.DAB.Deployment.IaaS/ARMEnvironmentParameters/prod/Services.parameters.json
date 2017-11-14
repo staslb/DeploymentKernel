@@ -18,11 +18,69 @@
       }
     },
     "location": {
-      "value": "West Europe",
+      "value": "[resourceGroup().location]",
       "metadata": {
         "group": "SharePoint Server settings",
         "description": "The address range of the SP App subnet created in the new VNET"
       }
+    },
+    "storageAccountType": {
+      "value": "Standard_LRS",
+      "metadata": {
+        "group": "SharePoint Server settings",
+        "description": "The address range of the SP App subnet created in the new VNET"
+      }
+    },
+    "storageAccountNamePrefix": {
+      "value": "storagename",
+      "metadata": {
+        "group": "SharePoint Server settings",
+        "description": "The address range of the SP App subnet created in the new VNET"
+      }
+    },
+    "servicesVMSize": {
+      "value": "Standard_DS1",
+      "metadata": {
+        "group": "Services Server settings",
+        "description": "The address range of the SP App subnet created in the new VNET"
+      }
+    },
+    "adminUsername": {
+      "value": "kernel",
+      "metadata": {
+        "group": "Service Server settings",
+        "description": "The address range of the SP App subnet created in the new VNET"
+      }
+
+    },
+    "adminPassword": {
+      "value": "New_opportunity",
+      "metadata": {
+        "group": "Service Server settings",
+        "description": "The address range of the SP App subnet created in the new VNET"
+      }
+    },
+    "virtualNetworkName": {
+      "value": "DigAgroVNet",
+      "metadata": {
+        "group": "Infrastructure settings",
+        "description": "Name of virtual network to be used"
+      }
+    },
+    "subnetName": {
+      "value": "middleSubnet",
+      "metadata": {
+        "group": "Infrastructure settings",
+        "description": "Name of virtual network to be used"
+      }
+    },
+    "virtualNetworkResourceGroup": {
+      "value": "AzureResourceGroupAutomation",
+      "metadata": {
+        "group": "Infrastructure settings",
+        "description": "Name of virtual network to be used"
+      }
     }
+
   }
 }

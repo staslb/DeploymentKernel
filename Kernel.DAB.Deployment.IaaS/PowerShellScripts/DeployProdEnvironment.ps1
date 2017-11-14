@@ -6,12 +6,12 @@
 
 Param(
     [string] $ResourceGroupLocation = "West Europe",
-    [string] $ResourceGroupName = 'AzureResourceGroupAutomation',
+    [string] $ResourceGroupName = 'AzureResourceGroupAutomationServices',
     [switch] $UploadArtifacts,
     [string] $StorageAccountName,
     [string] $StorageContainerName = $ResourceGroupName.ToLowerInvariant() + '-stageartifacts',
-    [string] $TemplateFile = 'C:\Users\ostapkravchuk\source\repos\Kernel.DAB.Deployment.IaaS\Kernel.DAB.Deployment.IaaS\ARMGroupTemplates\prod\deployVNetGroup.json',
-    [string] $TemplateParametersFile = 'C:\Users\ostapkravchuk\source\repos\Kernel.DAB.Deployment.IaaS\Kernel.DAB.Deployment.IaaS\ARMEnvironmentParameters\prod\VNet.parameters.json',
+    [string] $TemplateFile = 'C:\Users\ostapkravchuk\source\repos\Kernel.DAB.Deployment.IaaS\Kernel.DAB.Deployment.IaaS\ARMGroupTemplates\prod\deployServicesGroup.json',
+    [string] $TemplateParametersFile = 'C:\Users\ostapkravchuk\source\repos\Kernel.DAB.Deployment.IaaS\Kernel.DAB.Deployment.IaaS\ARMEnvironmentParameters\prod\Services.parameters.json',
     [string] $ArtifactStagingDirectory = '.',
     [string] $DSCSourceFolder = 'DSC',
     [switch] $ValidateOnly
@@ -123,9 +123,6 @@ Write-Output '', 'Template is valid.'
 
 }
 else {
-
-
-
 
     New-AzureRmResourceGroupDeployment -Name ((Get-ChildItem $TemplateFile).BaseName + '-' + ((Get-Date).ToUniversalTime()).ToString('MMdd-HHmm')) `
                                        -ResourceGroupName $ResourceGroupName `

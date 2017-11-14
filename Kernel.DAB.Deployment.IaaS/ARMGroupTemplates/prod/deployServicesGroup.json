@@ -34,7 +34,13 @@
       "defaultValue": "Standard_DS1"
     },
     "subNetName": {
-      "type":  "string"
+      "type": "string"
+    },
+    "adminUsername": {
+      "type": "string"
+    },
+    "adminPassword": {
+      "type": "string"
     }
   },
   "variables": {
@@ -53,7 +59,17 @@
     //"VnetID": "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
     //"staticSubnetRef": "[concat(variables('VnetID'),'/subnets/',variables('subnetNames').staticSubnetName)]",
     "servicesPublicIPAddressName": "servicesPublicIP",
-    "servicesNetworkInterfaceName": "servicesNiC"
+    "servicesNetworkInterfaceName": "servicesNiC",
+    "vmSettings": {
+      "vmContainerName": "vhds",
+      "servicesVMName": "services-web",
+      "windowsImagePublisher": "MicrosoftWindowsServer",
+      "windowsImageOffer": "WindowsServer",
+      "windowsImageSKU": "2012-R2-Datacenter",
+      "rdpPort": 3389,
+      "windowsDiskSize": 128
+
+    }
   },
   "resources": [ //potentially you can create here a few network interfaces as it is in LookIntoDeep
     {
@@ -119,7 +135,7 @@
     },
 
     {
-      "name": "CreatingNetworkInterface",
+      "name": "createNetworkInterface",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
       "dependsOn": [
@@ -150,25 +166,78 @@
           }
         }
       }
-    },
-
-    {
-      "name": "createWindowsVirtualMachine",
-      "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2016-09-01",
-      "dependsOn": [],
-      "properties": {
-        "mode": "Incremental",
-        "templateLink": {
-          "uri": "[concat(parameters('_artifactsLocation'), '/', variables('createWindowsVirtualMachineTemplateFolder'), '/', variables('createWindowsVirtualMachineTemplateFileName'), parameters('_artifactsLocationSasToken'))]",
-          "contentVersion": "1.0.0.0"
-        },
-        "parametersLink": {
-          "uri": "[concat(parameters('_artifactsLocation'), '/', variables('createWindowsVirtualMachineTemplateFolder'), '/', variables('createWindowsVirtualMachineTemplateParametersFileName'), parameters('_artifactsLocationSasToken'))]",
-          "contentVersion": "1.0.0.0"
-        }
-      }
     }
+   //{
+   //   "name": "createWindowsVirtualMachine",
+   //   "type": "Microsoft.Resources/deployments",
+   //   "apiVersion": "2016-09-01",
+   //   "dependsOn": [
+   //     "Microsoft.Resources/deployments/createStorageAccount",
+   //     "Microsoft.Resources/deployments/createNetworkInterface"
+   //   ],
+   //   "properties": {
+   //     "mode": "Incremental",
+   //     "templateLink": {
+   //       "uri": "[concat(parameters('_artifactsLocation'), '/', variables('createWindowsVirtualMachineTemplateFolder'), '/', variables('createWindowsVirtualMachineTemplateFileName'), parameters('_artifactsLocationSasToken'))]",
+   //       "contentVersion": "1.0.0.0"
+   //     },
+   //     //  "parametersLink": {
+   //     //    "uri": "[concat(parameters('_artifactsLocation'), '/', variables('createWindowsVirtualMachineTemplateFolder'), '/', variables('createWindowsVirtualMachineTemplateParametersFileName'), parameters('_artifactsLocationSasToken'))]",
+   //     //    "contentVersion": "1.0.0.0"
+   //     //  }
+   //     "parameters": {
+   //       "servicesVMName": {
+   //         "value": "[variables('vmSettings').services]"
+   //       },
+   //       "location": {
+   //         "value": "[parameters('location')]"
+   //       },
+   //       "servicesVMSize": {
+   //         "value": "[parameters('servicesVMSize')]"
+   //       },
+   //       //"spWebAvailabilitySet": {
+   //       //  "value": "[variables('ids').spWebAvailabilitySetName]"
+   //       //},
+   //       //"spAppAvailabilitySet": {
+   //       //  "value": "[variables('ids').spAppAvailabilitySetName]"
+   //       //},
+   //       "adminUsername": {
+   //         "value": "[parameters('adminUsername')]"
+   //       },
+   //       "adminPassword": {
+   //         "value": "[parameters('adminPassword')]"
+   //       },
+   //       "spImagePublisher": {
+   //         "value": "[variables('vmSettings').spImagePublisher]"
+   //       },
+   //       "spImageOffer": {
+   //         "value": "[variables('vmSettings').spImageOffer]"
+   //       },
+   //       "spImageSKU": {
+   //         "value": "[variables('vmSettings').spImageSKU]"
+   //       },
+   //       "vmContainerName": {
+   //         "value": "[variables('vmSettings').vmContainerName]"
+   //       },
+   //       "storageAccountNamePrefix": {
+   //         "value": "[parameters('storageAccountNamePrefix')]"
+   //       }
+   //       //"spPreparationModulesURL": {
+   //       //  "value": "[concat(parameters('_artifactsLocation'),'/','dscv2','/','PrepareSharePointServerHA.ps1.zip', parameters('_artifactsLocationSasToken'))]"
+   //       //},
+   //       //"spPreparationFunction": {
+   //       //  "value": "PrepareSharePointServerHA.ps1\\PrepareSharePointServerHA"
+   //       // },
+   //       //"domainName": {
+   //       //  "value": "[parameters('domainName')]"
+   //       //},
+   //       //"DNSServer": {
+   //       //  "value": "[parameters('adPdcNicIPAddress')]"
+   //     }
+   //     }
+
+   //   }
+    
   ],
   "outputs": {
   }

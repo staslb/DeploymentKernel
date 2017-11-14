@@ -57,29 +57,6 @@
   },
   "resources": [
     {
-      "name": "[variables('virtualMachineNicName')]",
-      "type": "Microsoft.Network/networkInterfaces",
-      "location": "[parameters('virtualNetworkLocation')]",
-      "apiVersion": "2016-03-30",
-      "dependsOn": [ ],
-      "tags": {
-        "displayName": "virtualMachineNic"
-      },
-      "properties": {
-        "ipConfigurations": [
-          {
-            "name": "ipconfig1",
-            "properties": {
-              "privateIPAllocationMethod": "Dynamic",
-              "subnet": {
-                "id": "[variables('virtualMachineSubnetRef')]"
-              }
-            }
-          }
-        ]
-      }
-    },
-    {
       "name": "[parameters('virtualMachineName')]",
       "type": "Microsoft.Compute/virtualMachines",
       "location": "[parameters('storageAccountLocation')]",

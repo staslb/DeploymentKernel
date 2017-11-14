@@ -155,6 +155,9 @@
           },
           "virtualNetworkName": {
             "value": "[parameters('virtualNetworkName')]"
+          },
+          "virtualNetworkResourceGroup": {
+            "value": "AzureResourceGroupAutomation"
           }
         }
       }

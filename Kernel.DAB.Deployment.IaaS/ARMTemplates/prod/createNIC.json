@@ -17,13 +17,23 @@
     },
     "publicIPAddressName": {
       "type": "string"
+    },
+    "newNICTestName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "virtualNetworkLocation": {
+      "type": "string"
+    },
+    "virtualNetworkResourceGroup": {
+      "type": "string"
     }
   },
   "variables": {
 
-    "newNICVnetID": "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
-    "newNICSubnetRef": "[concat(variables('newNICVnetID'), '/subnets/', parameters('virtualNetworkSubnetName'))]"
-  },
+    "newNICVnetID": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
+    "newNICSubnetRef": "[concat(variables('newNICVnetID'), '/subnets/', parameters('virtualNetworkSubnetName'))]",
+      },
   "resources": [
     {
       "name": "[parameters('networkInterfaceName')]",

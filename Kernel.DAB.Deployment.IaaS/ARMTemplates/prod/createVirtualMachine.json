@@ -90,7 +90,7 @@
         "networkProfile": {
           "networkInterfaces": [
             {
-              "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('virtualMachineNicName'))]"
+              "id": "[resourceId('Microsoft.Network/networkInterfaces', concat(parameters('virtualMachineName'), 'NiC'))]"
             }
           ]
         }

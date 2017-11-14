@@ -201,23 +201,13 @@
           "virtualMachineAdminPassword": {
             "value": "[parameters('adminPassword')]"
           },
-          "spImagePublisher": {
-            "value": "[variables('vmSettings').windowsImagePublisher]"
-          },
-          "spImageOffer": {
-            "value": "[variables('vmSettings').windowsImageOffer]"
-          },
+
           "virtualMachineWindowsOSVersion": {
             "value": "[variables('vmSettings').windowsImageSKU]"
           },
-          "vmContainerName": {
-            "value": "[variables('vmSettings').vmContainerName]"
-          },
+
           "storageAccountNamePrefix": {
             "value": "[parameters('storageAccountNamePrefix')]"
-          },
-          "storageAccountLocation": {
-            "value": "West Europe"
           },
           "storageAccountResourceGroup": {
             "value": "AzureResourceGroupAutomationServices"

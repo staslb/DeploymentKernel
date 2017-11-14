@@ -26,7 +26,7 @@
     "storageAccountNamePrefix": {
       "type": "string"
     },
-    "storageAccountLocation": {
+    "location": {
       "type": "string"
     },
     "storageAccountResourceGroup": {
@@ -56,7 +56,7 @@
     {
       "name": "[parameters('virtualMachineName')]",
       "type": "Microsoft.Compute/virtualMachines",
-      "location": "[parameters('storageAccountLocation')]",
+      "location": "[parameters('location')]",
       "apiVersion": "2015-06-15",
       "dependsOn": [
         "[resourceId('Microsoft.Network/networkInterfaces', variables('virtualMachineNicName'))]"

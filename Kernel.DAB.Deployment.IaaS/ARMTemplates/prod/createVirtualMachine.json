@@ -23,7 +23,7 @@
         "Windows-Server-Technical-Preview"
       ]
     },
-    "storageAccountName": {
+    "storageAccountNamePrefix": {
       "type": "string"
     },
     "storageAccountLocation": {
@@ -33,9 +33,6 @@
       "type": "string"
     },
     "virtualNetworkName": {
-      "type": "string"
-    },
-    "virtualNetworkLocation": {
       "type": "string"
     },
     "virtualNetworkResourceGroup": {
@@ -48,12 +45,12 @@
   "variables": {
     "virtualMachineImagePublisher": "MicrosoftWindowsServer",
     "virtualMachineImageOffer": "WindowsServer",
-    "virtualMachineOSDiskName": "virtualMachineOSDisk",
-    "virtualMachineVmSize": "Standard_D2_v2",
+    "virtualMachineOSDiskName": "servicesVMOSDisk",
+    "virtualMachineVmSize": "Standard_DS1",
     "virtualMachineVnetID": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
     "virtualMachineSubnetRef": "[concat(variables('virtualMachineVnetID'), '/subnets/', parameters('virtualNetworkSubnetName'))]",
     "virtualMachineStorageAccountContainerName": "vhds",
-    "virtualMachineNicName": "[concat(parameters('virtualMachineName'), 'NetworkInterface')]"
+    "virtualMachineNicName": "[concat(parameters('virtualMachineName'), 'NIC')]"
   },
   "resources": [
     {

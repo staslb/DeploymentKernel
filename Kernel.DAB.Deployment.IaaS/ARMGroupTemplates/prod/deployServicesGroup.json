@@ -69,7 +69,10 @@
       "rdpPort": 3389,
       "windowsDiskSize": 128
 
-    }
+    },
+    "createVirtualMachineTemplateFolder": "nestedtemplates",
+    "createVirtualMachineTemplateFileName": "createVirtualMachine.json",
+    "createVirtualMachineTemplateParametersFileName": "createVirtualMachine.parameters.json"
   },
   "resources": [ //potentially you can create here a few network interfaces as it is in LookIntoDeep
     {
@@ -80,7 +83,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "https://raw.githubusercontent.com/Aresall1990/DeploymentKernel/master/Kernel.DAB.Deployment.IaaS/ARMTemplates/prod/createStorageAccount.json",          
+          "uri": "https://raw.githubusercontent.com/Aresall1990/DeploymentKernel/master/Kernel.DAB.Deployment.IaaS/ARMTemplates/prod/createStorageAccount.json",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
@@ -161,9 +164,89 @@
           }
         }
       }
+    },
+    {
+       "name": "createWindowsVirtualMachine",
+       "type": "Microsoft.Resources/deployments",
+       "apiVersion": "2016-09-01",
+       "dependsOn": [
+         "Microsoft.Resources/deployments/createStorageAccount",
+         "Microsoft.Resources/deployments/createNetworkInterface"
+       ],
+       "properties": {
+         "mode": "Incremental",
+        "templateLink": {
+          "uri": "https://raw.githubusercontent.com/Aresall1990/DeploymentKernel/master/Kernel.DAB.Deployment.IaaS/ARMTemplates/prod/createVirtualMachine.json",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "virtualMachineName": {
+            "value": "[variables('vmSettings').servicesVMName]"
+          },
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "servicesVMSize": {
+            "value": "[parameters('servicesVMSize')]"
+          },
+          //"spWebAvailabilitySet": {
+          //  "value": "[variables('ids').spWebAvailabilitySetName]"
+          //},
+          //"spAppAvailabilitySet": {
+          //  "value": "[variables('ids').spAppAvailabilitySetName]"
+          //},
+          "virtualMachineAdminUserName": {
+            "value": "[parameters('adminUsername')]"
+          },
+          "virtualMachineAdminPassword": {
+            "value": "[parameters('adminPassword')]"
+          },
+          "spImagePublisher": {
+            "value": "[variables('vmSettings').windowsImagePublisher]"
+          },
+          "spImageOffer": {
+            "value": "[variables('vmSettings').windowsImageOffer]"
+          },
+          "virtualMachineWindowsOSVersion": {
+            "value": "[variables('vmSettings').windowsImageSKU]"
+          },
+          "vmContainerName": {
+            "value": "[variables('vmSettings').vmContainerName]"
+          },
+          "storageAccountNamePrefix": {
+            "value": "[parameters('storageAccountNamePrefix')]"
+          },
+          "storageAccountLocation": {
+            "value": "West Europe"
+          },
+          "storageAccountResourceGroup": {
+            "value": "AzureResourceGroupAutomationServices"
+          },
+          "virtualNetworkName": {
+            "value": "[parameters('virtualNetworkName')]"
+          },
+          "virtualNetworkResourceGroup": {
+            "value": "AzureResourceGroupAutomation"
+          },
+          "virtualNetworkSubnetName": {
+            "value": "middleSubnet"
+          }
+          //"spPreparationModulesURL": {
+          //  "value": "[concat(parameters('_artifactsLocation'),'/','dscv2','/','PrepareSharePointServerHA.ps1.zip', parameters('_artifactsLocationSasToken'))]"
+          //},
+          //"spPreparationFunction": {
+          //  "value": "PrepareSharePointServerHA.ps1\\PrepareSharePointServerHA"
+          // },
+          //"domainName": {
+          //  "value": "[parameters('domainName')]"
+          //},
+          //"DNSServer": {
+          //  "value": "[parameters('adPdcNicIPAddress')]"
+        }
+      }
     }
- 
-    
+
+
   ],
   "outputs": {
   }

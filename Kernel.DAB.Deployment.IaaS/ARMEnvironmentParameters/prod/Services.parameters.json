@@ -67,7 +67,7 @@
         "description": "Name of virtual network to be used"
       }
     },
-    "subnetName": {
+    "subNetName": {
       "value": "middleSubnet",
       "metadata": {
         "group": "Infrastructure settings",

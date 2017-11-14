@@ -150,11 +150,11 @@
           "publicIPAddressName": {
             "value": "[variables('servicesPublicIPAddressName')]"
           },
+          "virtualNetworkSubnetName": {
+            "value": "middleSubnet"
+          },
           "virtualNetworkName": {
             "value": "[parameters('virtualNetworkName')]"
-          },
-          "subNetName": {
-            "value": "[parameters('subNetName')]"
           }
         }
       }

@@ -23,7 +23,7 @@
         "Windows-Server-Technical-Preview"
       ]
     },
-    "storageAccountNamePrefix": {
+    "storageAccountName": {
       "type": "string"
     },
     "location": {

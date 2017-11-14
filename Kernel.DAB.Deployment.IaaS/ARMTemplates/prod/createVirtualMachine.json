@@ -56,9 +56,7 @@
       "type": "Microsoft.Compute/virtualMachines",
       "location": "[parameters('location')]",
       "apiVersion": "2015-06-15",
-      "dependsOn": [
-        "[reference(resourceId('Microsoft.Network/networkInterfaces', concat(parameters('virtualMachineName'), 'NIC'))]"
-      ],
+      "dependsOn": [ ],
       "tags": {
         "displayName": "virtualMachine"
       },
@@ -90,7 +88,7 @@
         "networkProfile": {
           "networkInterfaces": [
             {
-              "id": "[reference(resourceId('Microsoft.Network/networkInterfaces', concat(parameters('virtualMachineName'), 'NIC'))]"
+              "id":  "[resourceId('AzureResourceGroupAutomationServices', 'Microsoft.Network/networkInterfaces', concat(parameters('virtualMachineName'), 'NiC'))]"
             }
           ]
         }

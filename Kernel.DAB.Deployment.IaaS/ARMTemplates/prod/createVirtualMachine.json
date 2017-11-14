@@ -47,7 +47,7 @@
     "virtualMachineVnetID": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
     "virtualMachineSubnetRef": "[concat(variables('virtualMachineVnetID'), '/subnets/', parameters('virtualNetworkSubnetName'))]",
     "virtualMachineStorageAccountContainerName": "vhds",
-    "virtualMachineNicName": "[concat(parameters('virtualMachineName'), 'NiC')]",
+    "virtualMachineNicName": "servicesNiC",
     "storageAccountName": "storagename4" //to fix it
   },
   "resources": [

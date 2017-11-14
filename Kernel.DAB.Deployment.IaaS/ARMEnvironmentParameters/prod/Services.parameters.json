@@ -18,7 +18,7 @@
       }
     },
     "location": {
-      "value": "[resourceGroup().location]",
+      "value": "West Europe",
       "metadata": {
         "group": "SharePoint Server settings",
         "description": "The address range of the SP App subnet created in the new VNET"
@@ -73,14 +73,13 @@
         "group": "Infrastructure settings",
         "description": "Name of virtual network to be used"
       }
-    },
-    "virtualNetworkResourceGroup": {
-      "value": "AzureResourceGroupAutomation",
-      "metadata": {
-        "group": "Infrastructure settings",
-        "description": "Name of virtual network to be used"
-      }
+    }
+   // "virtualNetworkResourceGroup": {
+   //   "value": "AzureResourceGroupAutomation",
+   //   "metadata": {
+   //     "group": "Infrastructure settings",
+   //     "description": "Name of virtual network to be used"
+   //   }
     }
 
   }
-}

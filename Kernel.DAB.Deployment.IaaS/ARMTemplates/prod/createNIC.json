@@ -18,10 +18,6 @@
     "publicIPAddressName": {
       "type": "string"
     },
-    "newNICTestName": {
-      "type": "string",
-      "minLength": 1
-    },
     "virtualNetworkLocation": {
       "type": "string"
     },

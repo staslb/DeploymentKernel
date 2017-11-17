@@ -219,10 +219,10 @@
             "value": "middleSubnet"
           },
           "servicesPreparationModulesURL": {
-            "value": "https://github.com/Azure/azure-quickstart-templates/raw/master/dsc-extension-iis-server-windows-vm/ContosoWebsite.ps1.zip"
+            "value": "https://raw.githubusercontent.com/Aresall1990/DeploymentKernel/master/Kernel.DAB.Deployment.IaaS/dsc/IISInstall.ps1.zip"          
           },
           "servicesPreparationFunction": {
-            "value": "ContosoWebsite.ps1\\ContosoWebsite"
+            "value": "IISInstall.ps1\\InstallIIS"
           }
           //"domainName": {
           //  "value": "[parameters('domainName')]"

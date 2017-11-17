@@ -126,7 +126,7 @@
           "ModulesUrl": "[parameters('servicesPreparationModulesURL')]",
           "ConfigurationFunction": "[parameters('servicesPreparationFunction')]",
           "Properties": {
-            "MachineName": "[parameters('virtualMachineName')]"
+            "nodeName": "[parameters('virtualMachineName')]"
           }
         },
         "protectedSettings": null

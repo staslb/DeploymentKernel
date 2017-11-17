@@ -73,13 +73,16 @@
         "group": "Infrastructure settings",
         "description": "Name of virtual network to be used"
       }
+    },
+    // "virtualNetworkResourceGroup": {
+    //   "value": "AzureResourceGroupAutomation",
+    //   "metadata": {
+    //     "group": "Infrastructure settings",
+    //     "description": "Name of virtual network to be used"
+    //   }
+    "modulesUrl": {
+      "value": "https://github.com/Azure/azure-quickstart-templates/raw/master/dsc-extension-iis-server-windows-vm/ContosoWebsite.ps1.zip"
     }
-   // "virtualNetworkResourceGroup": {
-   //   "value": "AzureResourceGroupAutomation",
-   //   "metadata": {
-   //     "group": "Infrastructure settings",
-   //     "description": "Name of virtual network to be used"
-   //   }
-    }
+  }
 
   }

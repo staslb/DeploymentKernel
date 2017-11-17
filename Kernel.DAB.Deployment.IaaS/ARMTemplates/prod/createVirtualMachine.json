@@ -37,6 +37,20 @@
     },
     "virtualNetworkSubnetName": {
       "type": "string"
+    },
+    "servicesPreparationFunction": {
+      "type": "string",
+      "metadata": {
+        "description": "URL for the DSC configuration module. NOTE: Can be a Github url(raw) to the zip file"
+      }
+    },
+
+    "servicesPreparationModulesURL": {
+      "type": "string",
+      "metadata": {
+        "description": "URL for the DSC configuration module. NOTE: Can be a Github url(raw) to the zip file"
+      }
+
     }
   },
   "variables": {
@@ -48,7 +62,8 @@
     "virtualMachineSubnetRef": "[concat(variables('virtualMachineVnetID'), '/subnets/', parameters('virtualNetworkSubnetName'))]",
     "virtualMachineStorageAccountContainerName": "vhds",
     "virtualMachineNicName": "servicesNiC",
-    "storageAccountName": "storagename4" //to fix it
+    "storageAccountName": "storagename4", //to fix it
+    "virtualMachineExtentionName": "dscExtension"
   },
   "resources": [
     {
@@ -88,10 +103,33 @@
         "networkProfile": {
           "networkInterfaces": [
             {
-              "id":  "[resourceId('AzureResourceGroupAutomationServices', 'Microsoft.Network/networkInterfaces', concat(parameters('virtualMachineName'), 'NiC'))]"
+              "id": "[resourceId('AzureResourceGroupAutomationServices', 'Microsoft.Network/networkInterfaces', concat(parameters('virtualMachineName'), 'NiC'))]"
             }
           ]
         }
+      }
+    },
+    {
+      "type": "Microsoft.Compute/virtualMachines/extensions",
+      "name": "[concat(parameters('virtualMachineName'),'/', variables('virtualMachineExtentionName'))]",
+      "apiVersion": "2015-05-01-preview",
+      "location": "[resourceGroup().location]",
+      "dependsOn": [
+        "[concat('Microsoft.Compute/virtualMachines/', parameters('virtualMachineName'))]"
+      ],
+      "properties": {
+        "publisher": "Microsoft.Powershell",
+        "type": "DSC",
+        "typeHandlerVersion": "2.19",
+        "autoUpgradeMinorVersion": true,
+        "settings": {
+          "ModulesUrl": "[parameters('servicesPreparationModulesURL')]",
+          "ConfigurationFunction": "[parameters('servicesPreparationFunction')]",
+          "Properties": {
+            "MachineName": "[parameters('virtualMachineName')]"
+          }
+        },
+        "protectedSettings": null
       }
     }
   ],

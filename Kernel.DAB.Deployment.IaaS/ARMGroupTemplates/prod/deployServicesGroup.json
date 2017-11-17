@@ -218,12 +218,12 @@
           "virtualNetworkSubnetName": {
             "value": "middleSubnet"
           }
-          //"spPreparationModulesURL": {
-          //  "value": "[concat(parameters('_artifactsLocation'),'/','dscv2','/','PrepareSharePointServerHA.ps1.zip', parameters('_artifactsLocationSasToken'))]"
-          //},
-          //"spPreparationFunction": {
-          //  "value": "PrepareSharePointServerHA.ps1\\PrepareSharePointServerHA"
-          // },
+          "servicesPreparationModulesURL": {
+            "value": "https://github.com/Azure/azure-quickstart-templates/raw/master/dsc-extension-iis-server-windows-vm/ContosoWebsite.ps1.zip"
+          },
+          "servicesPreparationFunction": {
+            "value": "ContosoWebsite.ps1\\ContosoWebsite"
+          }
           //"domainName": {
           //  "value": "[parameters('domainName')]"
           //},

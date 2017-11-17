@@ -42,6 +42,7 @@
     <None Include="ARMTemplates\prod\createNIC.json" />
     <None Include="ARMTemplates\prod\createPublicIP.json" />
     <None Include="ARMTemplates\prod\createStorageAccount.json" />
+    <None Include="ARMTemplates\prod\createVirtualMachine.json" />
     <None Include="ARMTemplates\prod\createVnet.json" />
     <None Include="ARMTemplates\prod\provisioningKubernetesVM.json" />
     <None Include="ARMTemplates\prod\provisioningWso2SqlVM.json" />
@@ -78,6 +79,13 @@
     <Content Include="nestedtemplates\createNIC.parameters.json" />
     <Content Include="nestedtemplates\createStorageAccount.json" />
     <Content Include="nestedtemplates\createStorageAccount.parameters.json" />
+    <Content Include="nestedtemplates\createPublicIP.json" />
+    <Content Include="nestedtemplates\createPublicIP.parameters.json" />
+    <Content Include="nestedtemplates\createWindowsVirtualMachine.json" />
+    <Content Include="nestedtemplates\createWindowsVirtualMachine.parameters.json" />
+    <Content Include="nestedtemplates\createVirtualMachine.json" />
+    <Content Include="nestedtemplates\createVirtualMachine.parameters.json" />
+    <None Include="dsc\CreateWebServer.ps1" />
     <None Include="PowerShellScripts\Deploy-DevEnvironment.ps1" />
     <None Include="PowerShellScripts\Deploy-TestEnvironment.ps1" />
     <None Include="PowerShellScripts\DeployProdEnvironment.ps1" />

@@ -13,7 +13,7 @@ Param(
     [string] $TemplateFile = 'C:\Users\ostapkravchuk\source\repos\Kernel.DAB.Deployment.IaaS\Kernel.DAB.Deployment.IaaS\ARMGroupTemplates\prod\deployServicesGroup.json',
     [string] $TemplateParametersFile = 'C:\Users\ostapkravchuk\source\repos\Kernel.DAB.Deployment.IaaS\Kernel.DAB.Deployment.IaaS\ARMEnvironmentParameters\prod\Services.parameters.json',
     [string] $ArtifactStagingDirectory = '.',
-    [string] $DSCSourceFolder = '..\DSC',
+    [string] $DSCSourceFolder = 'DSC',
     [switch] $ValidateOnly
 )
 

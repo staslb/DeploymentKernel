@@ -64,7 +64,7 @@
         "typeHandlerVersion": "2.19",
         "autoUpgradeMinorVersion": true,
         "settings": {
-          "ModulesUrl": "[concat(parameters('baseUrl'), '/dsc/configureADDNS.zip')]",
+          "ModulesUrl": "[concat(parameters('baseUrl'), '/dsc/configureADDNS.ps1.zip')]",
           "ConfigurationFunction": "configureADDNS.ps1\\configureADDNS",
           "Properties": {
             "DomainName": "[parameters('domainName')]",

@@ -94,6 +94,9 @@
           "location": {
             "value": "[parameters('location')]"
           },
+          "virtualMachineName": {
+            "value": "[variables('vmSettings').dnsVMName]"
+          },
           "storageAccountNamePrefix": {
             "value": "[parameters('storageAccountNamePrefix')]"
           },

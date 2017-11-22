@@ -84,7 +84,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "variables('createNetworkInterfaceUrl')",
+          "uri": "[variables('createNetworkInterfaceUrl')]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
@@ -109,7 +109,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "variables('createPublicIPUrl')",
+          "uri": "[variables('createPublicIPUrl')]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
@@ -141,7 +141,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "variables('createNetworkInterfaceUrl')",
+          "uri": "[variables('createNetworkInterfaceUrl')]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
@@ -177,7 +177,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "variables('createVirtualMachineUrl')",
+          "uri": "[variables('createVirtualMachineUrl')]",
            "contentVersion": "1.0.0.0"
         },
         "parameters": {
@@ -237,7 +237,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "variables('configureVirtualMachineUrl')",
+          "uri": "[variables('configureVirtualMachineUrl')]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {

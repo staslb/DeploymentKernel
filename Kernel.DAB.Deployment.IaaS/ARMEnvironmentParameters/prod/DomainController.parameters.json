@@ -75,6 +75,22 @@
         "description": "The address range of the SP App subnet created in the new VNET"
       }
     },
+    "virtualNetworkName": {
+      "value": "DigAgroVNet",
+      "metadata": {
+        "group": "DNS Server settings",
+        "description": "The address range of the SP App subnet created in the new VNET"
+      }
+    },
+
+    "subNetName": {
+      "value": "middleSubnet",
+      "metadata": {
+        "group": "DNS Server settings",
+        "description": "The address range of the SP App subnet created in the new VNET"
+      }
+    },
+
     "adminUsername": {
       "value": "kernel",
       "metadata": {

@@ -20,7 +20,7 @@
   "resources": [
     {
       "type": "Microsoft.Storage/storageAccounts",
-      "name": "[concat(parameters('storageAccountNamePrefix'), 'Storage', length(parameters('virtualMachineName')))]",
+      "name": "[concat(parameters('storageAccountNamePrefix'), 'storage', length(parameters('virtualMachineName')))]",
       "apiVersion": "2016-01-01",
       "location": "[parameters('location')]",
       "sku": {

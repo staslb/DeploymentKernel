@@ -260,6 +260,12 @@
           "adminPassword": {
             "value": "[parameters('adminPassword')]"
           },
+          "firstUsername": {
+            "value": "teamcity"
+          },
+          "firstUserPassword": {
+            "value": "New_opportunity"
+          },
           "domainName": {
             "value": "[parameters('domainName')]"
           },

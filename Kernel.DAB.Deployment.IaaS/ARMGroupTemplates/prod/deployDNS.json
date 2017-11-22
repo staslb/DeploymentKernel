@@ -71,7 +71,7 @@
     "dnsNetworkInterfaceName": "dnsNiC",
     "vmSettings": {
       "vmContainerName": "vhds",
-      "dnsVMName": "dns",
+      "dnsVMName": "dnsKernel",
       "rdpPort": 3389,
       "windowsDiskSize": 128
     }
@@ -126,7 +126,7 @@
             "value": "Dynamic"
           },
           "dnsPrefix": {
-            "value": "dns"
+            "value": "dns-dab-kernel"
           }
         }
       }
@@ -196,7 +196,10 @@
           "virtualMachineAdminPassword": {
             "value": "[parameters('adminPassword')]"
           },
+          "storageAccountNamePrefix": {
 
+            "value":  "[parameters('storageAccountNamePrefix')]"           
+          },
           "storageAccountResourceGroup": {
             "value": "AzureResourceGroupAutomationDNS"
           },

@@ -6,6 +6,11 @@
       "type": "string",
       "minLength": 1
     },
+
+    "storageAccountNamePrefix": {
+      "type": "string"
+    },
+
     "virtualMachineAdminUserName": {
       "type": "string",
       "minLength": 1
@@ -64,7 +69,7 @@
     "virtualMachineSubnetRef": "[concat(variables('virtualMachineVnetID'), '/subnets/', parameters('virtualNetworkSubnetName'))]",
     "virtualMachineStorageAccountContainerName": "vhds",
     "virtualMachineNicName": "[concat(parameters('virtualMachineName'), 'NiC')]",
-    "storageAccountName": " [concat(parameters('virtualMachineName'), 'Storage', length(parameters('virtualMachineName')))]",
+    "storageAccountName": " [concat(parameters('storageAccountNamePrefix'), 'Storage', length(parameters('virtualMachineName')))]",
     "virtualMachineExtentionName": "dscExtension"
   },
   "resources": [

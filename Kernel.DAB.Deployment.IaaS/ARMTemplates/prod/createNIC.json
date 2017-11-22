@@ -25,7 +25,7 @@
   "variables": {
 
     "newNICVnetID": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
-    "newNICSubnetRef": "[concat(variables('newNICVnetID'), '/subnets/', parameters('virtualNetworkSubnetName'))]",
+    "newNICSubnetRef": "[concat(variables('newNICVnetID'), '/subnets/', parameters('virtualNetworkSubnetName'))]"
       },
   "resources": [
     {

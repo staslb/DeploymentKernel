@@ -66,15 +66,16 @@
     "configureVirtualMachineTemplateFileName": "configureDNSVirtualMachine.json",
     "configureVirtualMachineUrl": "[concat(parameters('_artifactsLocation'), '/',variables('nestedTemplatesFolder'), '/', variables('configureVirtualMachineTemplateFileName'))]",
 
-
-    "dnsPublicIPAddressName": "dnsPublicIP",
-    "dnsNetworkInterfaceName": "dnsNiC",
     "vmSettings": {
       "vmContainerName": "vhds",
       "dnsVMName": "dnsKernel",
       "rdpPort": 3389,
       "windowsDiskSize": 128
-    }
+    },
+
+    "dnsPublicIPAddressName": "dnsPublicIP",
+    "dnsNetworkInterfaceName":  "dnsKernelNiC"
+
 
   },
 

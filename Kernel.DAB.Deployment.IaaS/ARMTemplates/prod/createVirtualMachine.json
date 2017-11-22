@@ -110,7 +110,7 @@
         "networkProfile": {
           "networkInterfaces": [
             {
-              "id": "[resourceId('AzureResourceGroupAutomationServices', 'Microsoft.Network/networkInterfaces', concat(parameters('virtualMachineName'), 'NiC'))]"
+              "id": "[resourceId('AzureResourceGroupAutomationDNS', 'Microsoft.Network/networkInterfaces', concat(parameters('virtualMachineName'), 'NiC'))]"
             }
           ]
         }

@@ -85,7 +85,10 @@
     <Content Include="nestedtemplates\createWindowsVirtualMachine.parameters.json" />
     <Content Include="nestedtemplates\createVirtualMachine.json" />
     <Content Include="nestedtemplates\createVirtualMachine.parameters.json" />
+    <None Include="dscv2\ContosoWebsite.ps1.zip" />
+    <None Include="dsc\CreateDNS.ps1" />
     <None Include="dsc\CreateWebServer.ps1" />
+    <None Include="dsc\IISInstall.ps1.zip" />
     <None Include="PowerShellScripts\Deploy-DevEnvironment.ps1" />
     <None Include="PowerShellScripts\Deploy-TestEnvironment.ps1" />
     <None Include="PowerShellScripts\DeployProdEnvironment.ps1" />

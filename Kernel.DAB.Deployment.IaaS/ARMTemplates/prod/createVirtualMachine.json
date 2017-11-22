@@ -13,16 +13,6 @@
     "virtualMachineAdminPassword": {
       "type": "securestring"
     },
-    "virtualMachineWindowsOSVersion": {
-      "type": "string",
-      "defaultValue": "2012-R2-Datacenter",
-      "allowedValues": [
-        "2008-R2-SP1",
-        "2012-Datacenter",
-        "2012-R2-Datacenter",
-        "Windows-Server-Technical-Preview"
-      ]
-    },
     "location": {
       "type": "string"
     },
@@ -38,31 +28,43 @@
     "virtualNetworkSubnetName": {
       "type": "string"
     },
-    "servicesPreparationFunction": {
-      "type": "string",
-      "metadata": {
-        "description": "URL for the DSC configuration module. NOTE: Can be a Github url(raw) to the zip file"
-      }
+    // "servicesPreparationFunction": {
+    //   "type": "string",
+    //   "metadata": {
+    //     "description": "URL for the DSC configuration module. NOTE: Can be a Github url(raw) to the zip file"
+    //   }
+    // },
+
+    // "servicesPreparationModulesURL": {
+    //   "type": "string",
+    //   "metadata": {
+    //      "description": "URL for the DSC configuration module. NOTE: Can be a Github url(raw) to the zip file"
+    //    }
+
+    // }
+
+    "virtualMachineImageSKU": {
+      "type": "string"
     },
-
-    "servicesPreparationModulesURL": {
-      "type": "string",
-      "metadata": {
-        "description": "URL for the DSC configuration module. NOTE: Can be a Github url(raw) to the zip file"
-      }
-
+    "virtualMachineImageOffer": {
+      "type": "string"
+    },
+    "virtualMachineImagePublisher": {
+      "type": "string"
+    },
+    "virtualMachineSize": {
+      "type": "string"
     }
   },
+
   "variables": {
-    "virtualMachineImagePublisher": "MicrosoftWindowsServer",
-    "virtualMachineImageOffer": "WindowsServer",
-    "virtualMachineOSDiskName": "servicesVMOSDisk",
-    "virtualMachineVmSize": "Standard_DS1",
+
+    "virtualMachineOSDiskName": "[concat(parameters('virtualMachineName'), 'VMOSDisk')]",
     "virtualMachineVnetID": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
     "virtualMachineSubnetRef": "[concat(variables('virtualMachineVnetID'), '/subnets/', parameters('virtualNetworkSubnetName'))]",
     "virtualMachineStorageAccountContainerName": "vhds",
-    "virtualMachineNicName": "servicesNiC",
-    "storageAccountName": "storagename4", //to fix it
+    "virtualMachineNicName": "[concat(parameters('virtualMachineName'), 'NiC')]",
+    "storageAccountName": " [concat(parameters('virtualMachineName'), 'Storage', length(parameters('virtualMachineName')))]",
     "virtualMachineExtentionName": "dscExtension"
   },
   "resources": [
@@ -77,7 +79,7 @@
       },
       "properties": {
         "hardwareProfile": {
-          "vmSize": "[variables('virtualMachineVmSize')]"
+          "vmSize": "[parameters('virtualMachineSize')]"
         },
         "osProfile": {
           "computerName": "[parameters('virtualMachineName')]",
@@ -86,9 +88,9 @@
         },
         "storageProfile": {
           "imageReference": {
-            "publisher": "[variables('virtualMachineImagePublisher')]",
-            "offer": "[variables('virtualMachineImageOffer')]",
-            "sku": "[parameters('virtualMachineWindowsOSVersion')]",
+            "publisher": "[parameters('virtualMachineImagePublisher')]",
+            "offer": "[parameters('virtualMachineImageOffer')]",
+            "sku": "[parameters('virtualMachineImageSKU')]",
             "version": "latest"
           },
           "osDisk": {
@@ -108,30 +110,30 @@
           ]
         }
       }
-    },
-    {
-      "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(parameters('virtualMachineName'),'/', variables('virtualMachineExtentionName'))]",
-      "apiVersion": "2015-05-01-preview",
-      "location": "[resourceGroup().location]",
-      "dependsOn": [
-        "[concat('Microsoft.Compute/virtualMachines/', parameters('virtualMachineName'))]"
-      ],
-      "properties": {
-        "publisher": "Microsoft.Powershell",
-        "type": "DSC",
-        "typeHandlerVersion": "2.19",
-        "autoUpgradeMinorVersion": true,
-        "settings": {
-          "ModulesUrl": "[parameters('servicesPreparationModulesURL')]",
-          "ConfigurationFunction": "[parameters('servicesPreparationFunction')]",
-          "Properties": {
-            "nodeName": "[parameters('virtualMachineName')]"
-          }
-        },
-        "protectedSettings": null
-      }
     }
+    //{
+    //  "type": "Microsoft.Compute/virtualMachines/extensions",
+    //  "name": "[concat(parameters('virtualMachineName'),'/', variables('virtualMachineExtentionName'))]",
+    //  "apiVersion": "2015-05-01-preview",
+    //  "location": "[resourceGroup().location]",
+    //  "dependsOn": [
+    //    "[concat('Microsoft.Compute/virtualMachines/', parameters('virtualMachineName'))]"
+    //  ],
+    //  "properties": {
+    //    "publisher": "Microsoft.Powershell",
+    //    "type": "DSC",
+    //    "typeHandlerVersion": "2.19",
+    //    "autoUpgradeMinorVersion": true,
+    //    "settings": {
+    //      "ModulesUrl": "[parameters('servicesPreparationModulesURL')]",
+    //      "ConfigurationFunction": "[parameters('servicesPreparationFunction')]",
+    //      "Properties": {
+    //        "nodeName": "[parameters('virtualMachineName')]"
+    //      }
+    //    },
+    //    "protectedSettings": null
+    //  }
+    //}
   ],
   "outputs": {
   }

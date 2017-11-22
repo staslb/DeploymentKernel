@@ -1,0 +1,265 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+  //  "_artifactsLocation": {
+  //    "type": "string"
+  //  },
+  //  "_artifactsLocationSasToken": {
+  //    "type": "securestring"
+  //  },
+    "baseUrl": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "storageAccountNamePrefix": {
+      "type": "string"
+    },
+    "storageAccountType": {
+      "type": "string"
+    },
+    "virtualNetworkName": {
+      "type": "string"
+    },
+    "domainControllerVMSize": {
+      "type": "string"
+    },
+    "domainControllerImagePublisher": {
+      "type": "string"
+    },
+    "domainControllerImageOffer": {
+      "type": "string"
+    },
+    "domainControllerImageSKU": {
+      "type": "string"
+    },
+    "subNetName": {
+      "type": "string"
+    },
+    "adminUsername": {
+      "type": "string"
+    },
+    "adminPassword": {
+      "type": "string"
+    },
+    "domainName": {
+      "type": "string"
+    }
+  },
+
+  "variables": {
+    "storageAccountResourceGroup": "AzureResourceGroupAutomationDNS", //remove this hardcode
+    "nestedTemplatesFolder": "ARMTemplates/prod",
+    "createNICTemplateFileName": "createNIC.json",
+    "createNetworkInterfaceUrl": "[concat(parameters('baseUrl'), variables('nestedTemplatesFolder'), variables('createNICTemplateFileName'))]",
+    "createStorageAccountTemplateFileName": "createStorageAccount.json",
+    "createStorageAccountUrl": "[concat(parameters('baseUrl'), variables('nestedTemplatesFolder'), variables('createStorageAccountTemplateFileName'))]",
+    "createPublicIPTemplateFileName": "createPublicIP.json",
+    "createPublicIPUrl": "[concat(parameters('baseUrl'), variables('nestedTemplatesFolder'), variables('createPublicIPTemplateFileName'))]",
+    "createVirtualMachineTemplateFileName": "createVirtualMachine.json",
+    "createVirtualMachineUrl": "[concat(parameters('baseUrl'), variables('nestedTemplatesFolder'), variables('createVirtualMachineTemplateFileName'))]",
+    "configureVirtualMachineTemplateFileName": "configureDNSVirtualMachine.json",
+    "configureVirtualMachineUrl": "[concat(parameters('baseUrl'), variables('nestedTemplatesFolder'), variables('configureVirtualMachineTemplateFileName'))]",
+
+
+    "dnsPublicIPAddressName": "dnsPublicIP",
+    "dnsNetworkInterfaceName": "dnsNiC",
+    "vmSettings": {
+      "vmContainerName": "vhds",
+      "dnsVMName": "dns",
+      "rdpPort": 3389,
+      "windowsDiskSize": 128
+    }
+
+  },
+
+  "resources": [
+    {
+      "name": "createStorageAccount",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2016-09-01",
+      "dependsOn": [],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "variables('createNetworkInterfaceUrl')",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "storageAccountNamePrefix": {
+            "value": "[parameters('storageAccountNamePrefix')]"
+          },
+          "storageAccountType": {
+            "value": "[parameters('storageAccountType')]"
+          }
+        }
+      }
+    },
+
+    {
+      "name": "createPublicIP",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2016-09-01",
+      "dependsOn": [],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "variables('createPublicIPUrl')",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "publicIPAddressName": {
+            "value": "[variables('dnsPublicIPAddressName')]"
+          },
+          "publicIPAddressType": {
+            "value": "Dynamic"
+          },
+          "dnsPrefix": {
+            "value": "dns"
+          }
+        }
+      }
+
+    },
+
+    {
+      "name": "createNetworkInterface",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2015-01-01",
+      "dependsOn": [
+        //"Microsoft.Resources/deployments/CreatingVirtualNetwork",
+        "Microsoft.Resources/deployments/createPublicIP"
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "variables('createNetworkInterfaceUrl')",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "networkInterfaceName": {
+            "value": "[variables('dnsNetworkInterfaceName')]"
+          },
+          "publicIPAddressName": {
+            "value": "[variables('dnsPublicIPAddressName')]"
+          },
+          "virtualNetworkSubnetName": {
+            "value": "middleSubnet"
+          },
+          "virtualNetworkName": {
+            "value": "[parameters('virtualNetworkName')]"
+          },
+          "virtualNetworkResourceGroup": {
+            "value": "AzureResourceGroupAutomation"
+          }
+        }
+      }
+    },
+    {
+      "name": "createVirtualMachine",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2016-09-01",
+      "dependsOn": [
+        "Microsoft.Resources/deployments/createStorageAccount",
+        "Microsoft.Resources/deployments/createNetworkInterface"
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "variables('createVirtualMachineUrl')",
+           "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "virtualMachineName": {
+            "value": "[variables('vmSettings').dnsVMName]"
+          },
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "virtualMachineAdminUserName": {
+            "value": "[parameters('adminUsername')]"
+          },
+          "virtualMachineAdminPassword": {
+            "value": "[parameters('adminPassword')]"
+          },
+
+          "storageAccountResourceGroup": {
+            "value": "AzureResourceGroupAutomationDNS"
+          },
+          "virtualNetworkName": {
+            "value": "[parameters('virtualNetworkName')]"
+          },
+          "virtualNetworkResourceGroup": {
+            "value": "AzureResourceGroupAutomation"
+          },
+          "virtualNetworkSubnetName": {
+            "value": "middleSubnet"
+          },
+          "virtualMachineImageSKU": {
+            "value": "[parameters('domainControllerImageSKU')]"
+          },
+          "virtualMachineImageOffer": {
+            "value": "[parameters('domainControllerImageOffer')]"
+          },
+          "virtualMachineImagePublisher": {
+            "value": "[parameters('domainControllerImagePublisher')]"
+          },
+          "virtualMachineSize": {
+
+            "value": "[parameters('domainControllerVMSize')]"
+          }
+          //"domainName": {
+          //  "value": "[parameters('domainName')]"
+          //},
+          //"DNSServer": {
+          //  "value": "[parameters('adPdcNicIPAddress')]"s
+        }
+      }
+    },
+    {
+      "name": "configureVirtualMachine",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2016-09-01",
+      "dependsOn": [
+        "Microsoft.Resources/deployments/createVirtualMachine"
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "variables('configureVirtualMachineUrl')",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "adminUsername": {
+            "value": "[parameters('adminUsername')]"
+          },
+          "adminPassword": {
+            "value": "[parameters('adminPassword')]"
+          },
+          "domainName": {
+            "value": "[parameters('domainName')]"
+          },
+          "virtualMachineName": {
+            "value": "[variables('vmSettings').dnsVMName]"
+          },
+          "location": {
+            "value": "[parameters('location')]"
+          }
+        }
+      }
+    }
+  ],
+  "outputs": {
+  }
+}

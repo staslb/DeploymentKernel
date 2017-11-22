@@ -6,12 +6,12 @@
 
 Param(
     [string] $ResourceGroupLocation = "West Europe",
-    [string] $ResourceGroupName = 'AzureResourceGroupAutomationServices',
+    [string] $ResourceGroupName = 'AzureResourceGroupAutomationDNS',
     [switch] $UploadArtifacts,
     [string] $StorageAccountName,
     [string] $StorageContainerName = $ResourceGroupName.ToLowerInvariant() + '-stageartifacts',
-    [string] $TemplateFile = 'C:\Users\ostapkravchuk\source\repos\Kernel.DAB.Deployment.IaaS\Kernel.DAB.Deployment.IaaS\ARMGroupTemplates\prod\deployServicesGroup.json',
-    [string] $TemplateParametersFile = 'C:\Users\ostapkravchuk\source\repos\Kernel.DAB.Deployment.IaaS\Kernel.DAB.Deployment.IaaS\ARMEnvironmentParameters\prod\Services.parameters.json',
+    [string] $TemplateFile = 'C:\Users\ostapkravchuk\source\repos\Kernel.DAB.Deployment.IaaS\Kernel.DAB.Deployment.IaaS\ARMGroupTemplates\prod\deployDNS.json',
+    [string] $TemplateParametersFile = 'C:\Users\ostapkravchuk\source\repos\Kernel.DAB.Deployment.IaaS\Kernel.DAB.Deployment.IaaS\ARMEnvironmentParameters\prod\DomainController.parameters.json',
     [string] $ArtifactStagingDirectory = '.',
     [string] $DSCSourceFolder = 'DSC',
     [switch] $ValidateOnly

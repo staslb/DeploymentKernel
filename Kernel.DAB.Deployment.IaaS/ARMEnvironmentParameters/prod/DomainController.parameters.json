@@ -2,35 +2,38 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "baseUrl": {
-      "value": "https://raw.githubusercontent.com/Aresall1990/DeploymentKernel/master/Kernel.DAB.Deployment.IaaS",
-      "metadata": {
-        "artifactsBaseUrl": "",
-        "description": "URL to acquire other templates"
-      }
+
+
+  },
+  "_artifactsLocation": {
+    "value": "https://raw.githubusercontent.com/Aresall1990/DeploymentKernel/master/Kernel.DAB.Deployment.IaaS",
+    "metadata": {
+      "group": "Infrastructure settings",
+      "description": "The address range of the SP App subnet created in the new VNET"
+    }
+  },
+  "_artifactsLocationSasToken": {
+    "value": "",
+    "metadata": {
+      "group": "Infrastructure settings",
+      "description": "Auto-generated token to access _artifactsLocation",
+      "artifactsLocationSasToken": ""
+    }
+  },
+  "location": {
+    "value": "West Europe",
+    "metadata": {
+      "group": "DNS Server settings",
+      "description": "The location of resource to be placed"
+    }
+  },
+
+  "baseUrl": {
+    "value": "https://raw.githubusercontent.com/Aresall1990/DeploymentKernel/master/Kernel.DAB.Deployment.IaaS",
+    "metadata": {
+      "description": "URL to acquire other templates"
     },
-    //"_artifactsLocation": {
-    //  "value": "https://raw.githubusercontent.com/Aresall1990/DeploymentKernel/master/Kernel.DAB.Deployment.IaaS",
-    //  "metadata": {
-    //    "group": "Infrastructure settings",
-    //    "description": "The address range of the SP App subnet created in the new VNET"
-    //  }
-    //},
-    //"_artifactsLocationSasToken": {
-    //  "value": "",
-    //  "metadata": {
-    //    "group": "Infrastructure settings",
-    //    "description": "Auto-generated token to access _artifactsLocation",
-    //    "artifactsLocationSasToken": ""
-    //  }
-    //},
-    "location": {
-      "value": "West Europe",
-      "metadata": {
-        "group": "DNS Server settings",
-        "description": "The location of resource to be placed"
-      }
-    },
+
     "storageAccountType": {
       "value": "Standard_LRS",
       "metadata": {

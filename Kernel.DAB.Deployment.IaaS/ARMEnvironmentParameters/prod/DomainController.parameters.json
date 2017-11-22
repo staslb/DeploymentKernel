@@ -3,8 +3,6 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
 
-
-  },
   "_artifactsLocation": {
     "value": "https://raw.githubusercontent.com/Aresall1990/DeploymentKernel/master/Kernel.DAB.Deployment.IaaS",
     "metadata": {
@@ -32,7 +30,8 @@
     "value": "https://raw.githubusercontent.com/Aresall1990/DeploymentKernel/master/Kernel.DAB.Deployment.IaaS",
     "metadata": {
       "description": "URL to acquire other templates"
-    },
+    }
+  },
 
     "storageAccountType": {
       "value": "Standard_LRS",

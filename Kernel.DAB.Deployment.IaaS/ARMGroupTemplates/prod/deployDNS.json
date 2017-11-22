@@ -56,15 +56,15 @@
     "storageAccountResourceGroup": "AzureResourceGroupAutomationDNS", //remove this hardcode
     "nestedTemplatesFolder": "ARMTemplates/prod",
     "createNICTemplateFileName": "createNIC.json",
-    "createNetworkInterfaceUrl": "[concat(parameters('baseUrl'),'/', variables('nestedTemplatesFolder'),'/', variables('createNICTemplateFileName'))]",
+    "createNetworkInterfaceUrl": "[concat(parameters('_artifactsLocation'),'/', variables('nestedTemplatesFolder'),'/', variables('createNICTemplateFileName'))]",
     "createStorageAccountTemplateFileName": "createStorageAccount.json",
-    "createStorageAccountUrl": "[concat(parameters('baseUrl'), '/', variables('nestedTemplatesFolder'), '/', variables('createStorageAccountTemplateFileName'))]",
+    "createStorageAccountUrl": "[concat(parameters('_artifactsLocation'), '/', variables('nestedTemplatesFolder'), '/', variables('createStorageAccountTemplateFileName'))]",
     "createPublicIPTemplateFileName": "createPublicIP.json",
-    "createPublicIPUrl": "[concat(parameters('baseUrl'), '/', variables('nestedTemplatesFolder'), '/', variables('createPublicIPTemplateFileName'))]",
+    "createPublicIPUrl": "[concat(parameters('_artifactsLocation'), '/', variables('nestedTemplatesFolder'), '/', variables('createPublicIPTemplateFileName'))]",
     "createVirtualMachineTemplateFileName": "createVirtualMachine.json",
-    "createVirtualMachineUrl": "[concat(parameters('baseUrl'), '/', variables('nestedTemplatesFolder'), '/', variables('createVirtualMachineTemplateFileName'))]",
+    "createVirtualMachineUrl": "[concat(parameters('_artifactsLocation'), '/', variables('nestedTemplatesFolder'), '/', variables('createVirtualMachineTemplateFileName'))]",
     "configureVirtualMachineTemplateFileName": "configureDNSVirtualMachine.json",
-    "configureVirtualMachineUrl": "[concat(parameters('baseUrl'), '/',variables('nestedTemplatesFolder'), '/', variables('configureVirtualMachineTemplateFileName'))]",
+    "configureVirtualMachineUrl": "[concat(parameters('_artifactsLocation'), '/',variables('nestedTemplatesFolder'), '/', variables('configureVirtualMachineTemplateFileName'))]",
 
 
     "dnsPublicIPAddressName": "dnsPublicIP",
@@ -244,6 +244,9 @@
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
+          "baseUrl": {
+            "value": "[parameters('baseUrl')]"
+          },
           "adminUsername": {
             "value": "[parameters('adminUsername')]"
           },

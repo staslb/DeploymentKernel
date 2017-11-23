@@ -36,7 +36,7 @@ Import-DscResource -ModuleName xActiveDirectory, xNetworking, xPendingReboot
         xDnsServerAddress DnsServerAddress 
         { 
             Address        = '127.0.0.1' 
-            InterfaceAlias = 'Ethernet'
+            InterfaceAlias = 'Ethernet 4'
             AddressFamily  = 'IPv4'
             DependsOn = "[WindowsFeature]DNS"
         }

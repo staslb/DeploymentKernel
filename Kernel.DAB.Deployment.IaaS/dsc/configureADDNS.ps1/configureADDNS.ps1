@@ -15,8 +15,9 @@ param
         [Int]$RetryIntervalSec=30
     )
 
-Import-DscResource -ModuleName xActiveDirectory, xNetworking, xPendingReboot
+    Import-DscResource -ModuleName xActiveDirectory, xNetworking, xPendingReboot
     [System.Management.Automation.PSCredential ]$DomainCreds = New-Object System.Management.Automation.PSCredential ("${DomainName}\$($Admincreds.UserName)", $Admincreds.Password)
+    $firstActiveAdapter = Get-NetAdapter -InterfaceDescription "Microsoft Hyper-V Network Adapter*" | Sort-Object -Property ifIndex | Select-Object -First 1
 
     Node localhost
     {
@@ -36,7 +37,7 @@ Import-DscResource -ModuleName xActiveDirectory, xNetworking, xPendingReboot
         xDnsServerAddress DnsServerAddress 
         { 
             Address        = '127.0.0.1' 
-            InterfaceAlias = 'Ethernet 4'
+            InterfaceAlias =  $firstActiveAdapter.InterfaceAlias
             AddressFamily  = 'IPv4'
             DependsOn = "[WindowsFeature]DNS"
         }
